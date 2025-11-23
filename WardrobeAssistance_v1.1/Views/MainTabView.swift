@@ -8,15 +8,22 @@
 import SwiftUI
 
 struct MainTabView: View {
+    // MainTabView owns all ViewModels via @StateObject, ensuring proper lifecycle management
+    // Child ViewModels hold references to parent ViewModels:
+    // - OutfitViewModel and RecommendationViewModel: strong references (safe - same lifetime)
+    // - AIStyleAssistant: weak reference to WardrobeViewModel (prevents retain cycles)
     @StateObject private var wardrobeViewModel = WardrobeViewModel()
     @StateObject private var outfitViewModel: OutfitViewModel
     @StateObject private var recommendationViewModel: RecommendationViewModel
     @StateObject private var styleAssistant: AIStyleAssistant
     
     init() {
+        // Create ViewModels with proper dependency injection
+        // All ViewModels are owned by MainTabView, so strong references between them are safe
         let wardrobeVM = WardrobeViewModel()
         let outfitVM = OutfitViewModel(wardrobeViewModel: wardrobeVM)
         let recommendationVM = RecommendationViewModel(wardrobeViewModel: wardrobeVM, outfitViewModel: outfitVM)
+        // AIStyleAssistant uses weak reference to prevent retain cycles
         let styleAssistant = AIStyleAssistant(wardrobeViewModel: wardrobeVM)
         
         _wardrobeViewModel = StateObject(wrappedValue: wardrobeVM)

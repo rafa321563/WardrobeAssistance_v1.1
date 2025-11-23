@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+//import CoreData
 import UIKit
 import SwiftUI
 
@@ -73,13 +73,58 @@ extension ItemEntity {
     
     // MARK: - Image Loading
     
-    /// Loads the image from disk asynchronously
+    /// Asynchronously loads the image with RAM caching
+    /// Checks ImageCache first, then loads from disk if needed
     /// - Returns: The UIImage if found, nil otherwise
-    var uiImage: UIImage? {
-        ImageFileManager.shared.loadImage(filename: imageFileName)
+    func loadImageAsync() async -> UIImage? {
+        guard let filename = imageFileName, !filename.isEmpty else {
+            return nil
+        }
+        
+        // Check RAM cache first
+        if let cachedImage = ImageCache.shared.image(for: filename) {
+            return cachedImage
+        }
+        
+        // Load from disk on background thread
+        return await Task.detached(priority: .userInitiated) {
+            guard let image = ImageFileManager.shared.loadImage(filename: filename) else {
+                return nil
+            }
+            
+            // Cache the loaded image
+            ImageCache.shared.set(image, for: filename)
+            
+            return image
+        }.value
     }
     
-    /// Returns a SwiftUI Image from the disk-stored image
+    /// Synchronously loads the image from disk (DEPRECATED - use loadImageAsync instead)
+    /// ⚠️ WARNING: This performs disk I/O on the calling thread. Use loadImageAsync() for better performance.
+    /// - Returns: The UIImage if found, nil otherwise
+    @available(*, deprecated, message: "Use loadImageAsync() instead to avoid blocking the main thread")
+    var uiImage: UIImage? {
+        guard let filename = imageFileName else { return nil }
+        
+        // Check cache first
+        if let cachedImage = ImageCache.shared.image(for: filename) {
+            return cachedImage
+        }
+        
+        // Fallback to disk (synchronous - not recommended)
+        guard let image = ImageFileManager.shared.loadImage(filename: filename) else {
+            return nil
+        }
+        
+        // Cache for future use
+        ImageCache.shared.set(image, for: filename)
+        
+        return image
+    }
+    
+    /// Returns a SwiftUI Image from the disk-stored image (DEPRECATED)
+    /// ⚠️ WARNING: This performs synchronous disk I/O. Use CachedImageView instead.
+    @available(*, deprecated, message: "Use CachedImageView instead for async loading")
     var swiftUIImage: Image? {
         guard let uiImage = uiImage else { return nil }
         return Image(uiImage: uiImage)
