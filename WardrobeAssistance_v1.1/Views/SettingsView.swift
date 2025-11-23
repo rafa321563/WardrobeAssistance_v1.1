@@ -141,8 +141,15 @@ struct SettingsView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     SettingsView()
         .environmentObject(SubscriptionManager())
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    SettingsView()
+        .environmentObject(SubscriptionManager())
+        .preferredColorScheme(.dark)
 }
 

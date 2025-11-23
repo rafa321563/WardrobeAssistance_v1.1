@@ -169,14 +169,19 @@ struct OnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
                         .background(
-                            LinearGradient(
-                                colors: OnboardingColors.gradient4,
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
+                            ZStack {
+                                // Градиентный фон
+                                LinearGradient(
+                                    colors: OnboardingColors.gradient4,
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                                // Темный оверлей для улучшения контрастности текста
+                                Color.black.opacity(0.1)
+                            }
                         )
                         .cornerRadius(20)
-                        .shadow(color: OnboardingColors.purple.opacity(0.4), radius: 15, x: 0, y: 8)
+                        .shadow(color: Color.primary.opacity(0.2), radius: 15, x: 0, y: 8)
                     }
                     .buttonStyle(NeomorphicButtonStyle())
                     
@@ -215,12 +220,12 @@ struct OnboardingView: View {
                     Toggle(isOn: $dontShowAgain) {
                         Text(getLocalizedText("Don't show again", "Не показывать снова"))
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.primary)
                     }
                     .toggleStyle(ModernCheckboxStyle())
                 }
             } else {
-                // Кнопка "Далее"
+                    // Кнопка "Далее"
                 Button(action: {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                         if currentPage < pages.count - 1 {
@@ -238,15 +243,20 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 18)
                     .background(
-                        LinearGradient(
-                            colors: pages[currentPage].gradient,
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
+                        ZStack {
+                            // Градиентный фон
+                            LinearGradient(
+                                colors: pages[currentPage].gradient,
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                            // Темный оверлей для улучшения контрастности текста
+                            Color.black.opacity(0.1)
+                        }
                     )
                     .cornerRadius(20)
                     .shadow(
-                        color: pages[currentPage].gradient.first?.opacity(0.4) ?? Color.clear,
+                        color: Color.primary.opacity(0.2),
                         radius: 15,
                         x: 0,
                         y: 8
@@ -573,7 +583,7 @@ struct GlassmorphismCard: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
             .fill(.ultraThinMaterial)
-            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+                .shadow(color: Color.primary.opacity(0.15), radius: 20, x: 0, y: 10)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
@@ -647,12 +657,20 @@ struct ModernCheckboxStyle: ToggleStyle {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Light Mode") {
     OnboardingView(onComplete: {})
+        .environmentObject(SubscriptionManager())
         .preferredColorScheme(.light)
 }
 
 #Preview("Dark Mode") {
     OnboardingView(onComplete: {})
+        .environmentObject(SubscriptionManager())
         .preferredColorScheme(.dark)
+}
+
+#Preview("Large Text") {
+    OnboardingView(onComplete: {})
+        .environmentObject(SubscriptionManager())
+        .environment(\.sizeCategory, .accessibilityLarge)
 }

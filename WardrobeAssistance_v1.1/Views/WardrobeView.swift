@@ -61,10 +61,10 @@ struct WardrobeView: View {
                     VStack(spacing: 16) {
                         Image(systemName: "tshirt")
                             .font(.system(size: 60))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Text("No items found")
                             .font(.headline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.primary)
                         Text("Add your first clothing item to get started")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -92,7 +92,13 @@ struct WardrobeView: View {
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.blue)
+                                .background(
+                                    ZStack {
+                                        Color.blue
+                                        // Темный оверлей для улучшения контрастности
+                                        Color.black.opacity(0.1)
+                                    }
+                                )
                                 .cornerRadius(12)
                         }
                     }
@@ -280,7 +286,7 @@ struct ItemCardView: View {
         }
         .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 4, x: 0, y: 2)
     }
 }
 

@@ -79,7 +79,12 @@ struct OutfitBuilderView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.blue)
+                            .background(
+                                ZStack {
+                                    Color.blue
+                                    Color.black.opacity(0.1)
+                                }
+                            )
                             .cornerRadius(12)
                     }
                     .padding()
@@ -87,7 +92,7 @@ struct OutfitBuilderView: View {
                     VStack(spacing: 16) {
                         Image(systemName: "square.grid.2x2")
                             .font(.system(size: 60))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Text("No items in outfit")
                             .font(.headline)
                             .foregroundColor(.secondary)
@@ -357,7 +362,7 @@ struct OutfitCardView: View {
         }
         .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 4, x: 0, y: 2)
     }
 }
 

@@ -160,9 +160,24 @@ struct PrivacyPolicyView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     NavigationView {
         PrivacyPolicyView()
     }
+    .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    NavigationView {
+        PrivacyPolicyView()
+    }
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Large Text") {
+    NavigationView {
+        PrivacyPolicyView()
+    }
+    .environment(\.sizeCategory, .accessibilityLarge)
 }
 

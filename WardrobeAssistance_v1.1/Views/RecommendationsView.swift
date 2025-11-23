@@ -58,7 +58,7 @@ struct RecommendationsView: View {
                         .padding()
                         .background(Color(.systemBackground))
                         .cornerRadius(16)
-                        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 2)
+                        .shadow(color: Color.primary.opacity(0.12), radius: 6, x: 0, y: 2)
                     }
                     
                     // Smart Matching
@@ -137,7 +137,7 @@ struct WeatherCard: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
     
     var weatherIcon: String {
@@ -223,7 +223,12 @@ struct DailyRecommendationSection: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(
+                            ZStack {
+                                Color.blue
+                                Color.black.opacity(0.1)
+                            }
+                        )
                         .cornerRadius(12)
                 }
                 
@@ -243,7 +248,12 @@ struct DailyRecommendationSection: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(
+                            ZStack {
+                                Color.blue
+                                Color.black.opacity(0.1)
+                            }
+                        )
                         .cornerRadius(12)
                 }
             }
@@ -251,7 +261,7 @@ struct DailyRecommendationSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -299,7 +309,7 @@ struct SmartMatchingSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -374,7 +384,7 @@ private struct AIInsightsSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.12), radius: 6, x: 0, y: 2)
     }
 }
 

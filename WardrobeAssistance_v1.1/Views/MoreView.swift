@@ -46,7 +46,7 @@ struct MoreView: View {
                         .environmentObject(storeKitManager)) {
                         HStack {
                             Image(systemName: "gear")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary)
                                 .frame(width: 24)
                             Text("Settings")
                         }
@@ -58,11 +58,21 @@ struct MoreView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     MoreView()
         .environmentObject(SubscriptionManager())
         .environmentObject(WardrobeViewModel())
         .environmentObject(OutfitViewModel(wardrobeViewModel: WardrobeViewModel()))
         .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    MoreView()
+        .environmentObject(SubscriptionManager())
+        .environmentObject(WardrobeViewModel())
+        .environmentObject(OutfitViewModel(wardrobeViewModel: WardrobeViewModel()))
+        .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+        .preferredColorScheme(.dark)
 }
 

@@ -59,7 +59,12 @@ struct CalendarView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.blue)
+                                .background(
+                                    ZStack {
+                                        Color.blue
+                                        Color.black.opacity(0.1)
+                                    }
+                                )
                                 .cornerRadius(12)
                         }
                     }

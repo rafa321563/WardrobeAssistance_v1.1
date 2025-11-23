@@ -91,7 +91,7 @@ struct OverviewStatsSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -167,7 +167,7 @@ struct MostWornSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -218,7 +218,7 @@ struct LeastWornSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -254,7 +254,7 @@ struct CategoryDistributionSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -287,7 +287,7 @@ struct StyleDistributionSection: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 

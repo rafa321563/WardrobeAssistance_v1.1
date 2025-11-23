@@ -195,11 +195,11 @@ struct PaywallView: View {
                 VStack(spacing: 4) {
                     Text("Then \(priceString) / \(subscriptionPeriod)")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.primary)
                     
                     Text("Cancel anytime — no charges until the trial ends")
                         .font(.system(size: 14))
-                        .foregroundColor(.secondary.opacity(0.8))
+                        .foregroundColor(.secondary)
                 }
             } else {
                 ProgressView()
@@ -220,7 +220,7 @@ struct PaywallView: View {
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(featureCardBackground)
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                .shadow(color: Color.primary.opacity(0.15), radius: 10, x: 0, y: 5)
         )
     }
     
@@ -245,14 +245,19 @@ struct PaywallView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 18)
             .background(
-                LinearGradient(
-                    colors: ctaButtonColors,
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
+                ZStack {
+                    // Градиентный фон
+                    LinearGradient(
+                        colors: ctaButtonColors,
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    // Темный оверлей для улучшения контрастности белого текста
+                    Color.black.opacity(0.15)
+                }
             )
             .cornerRadius(16)
-            .shadow(color: ctaButtonColors.first?.opacity(0.4) ?? Color.clear, radius: 15, x: 0, y: 8)
+            .shadow(color: Color.primary.opacity(0.2), radius: 15, x: 0, y: 8)
         }
         .disabled(isPurchasing || premiumProduct == nil)
     }
@@ -269,11 +274,11 @@ struct PaywallView: View {
     // MARK: - Restore Button
     
     private var restoreButton: some View {
-                    Button(action: {
-                        Task {
-                            await storeKitManager.restore()
-                        }
-                    }) {
+        Button(action: {
+            Task {
+                await storeKitManager.restore()
+            }
+        }) {
             Text("Restore Purchases")
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.blue)
@@ -471,8 +476,21 @@ enum PaywallDesign {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Light Mode") {
     PaywallView()
         .environmentObject(SubscriptionManager())
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    PaywallView()
+        .environmentObject(SubscriptionManager())
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Large Text") {
+    PaywallView()
+        .environmentObject(SubscriptionManager())
+        .environment(\.sizeCategory, .accessibilityLarge)
 }
 

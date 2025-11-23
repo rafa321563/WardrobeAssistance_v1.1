@@ -169,9 +169,24 @@ struct TermsOfUseView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     NavigationView {
         TermsOfUseView()
     }
+    .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    NavigationView {
+        TermsOfUseView()
+    }
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Large Text") {
+    NavigationView {
+        TermsOfUseView()
+    }
+    .environment(\.sizeCategory, .accessibilityLarge)
 }
 

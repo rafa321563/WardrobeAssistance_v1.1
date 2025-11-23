@@ -61,7 +61,12 @@ struct AIStylistChatView: View {
                     } label: {
                         Image(systemName: "paperplane.fill")
                             .padding(10)
-                            .background(Color.blue)
+                            .background(
+                                ZStack {
+                                    Color.blue
+                                    Color.black.opacity(0.1)
+                                }
+                            )
                             .foregroundColor(.white)
                             .clipShape(Circle())
                     }
@@ -91,7 +96,12 @@ struct AIStylistChatView: View {
     private func userBubble(_ text: String) -> some View {
         Text(text)
             .padding(12)
-            .background(Color.blue)
+            .background(
+                ZStack {
+                    Color.blue
+                    Color.black.opacity(0.1)
+                }
+            )
             .foregroundColor(.white)
             .cornerRadius(16)
     }

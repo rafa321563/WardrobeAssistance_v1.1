@@ -149,7 +149,12 @@ struct DailyRecommendationCard: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(
+                            ZStack {
+                                Color.blue
+                                Color.black.opacity(0.1)
+                            }
+                        )
                         .cornerRadius(12)
                 }
             } else {
@@ -162,7 +167,12 @@ struct DailyRecommendationCard: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(
+                            ZStack {
+                                Color.blue
+                                Color.black.opacity(0.1)
+                            }
+                        )
                         .cornerRadius(12)
                 }
             }
@@ -170,7 +180,7 @@ struct DailyRecommendationCard: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -233,7 +243,7 @@ struct StatCard: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.primary.opacity(0.15), radius: 4, x: 0, y: 2)
     }
 }
 
