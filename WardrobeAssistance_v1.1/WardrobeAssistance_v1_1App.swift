@@ -11,10 +11,30 @@ import SwiftUI
 struct WardrobeAssistance_v1_1App: App {
     let persistenceController = PersistenceController.shared
     
+    // MARK: - AppStorage для онбординга
+    /// Флаг, показывающий, был ли завершен онбординг
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .environment(\.managedObjectContext, persistenceController.viewContext)
+            Group {
+                if hasCompletedOnboarding {
+                    // Основное приложение
+                    MainTabView()
+                        .environment(\.managedObjectContext, persistenceController.viewContext)
+                        .transition(.opacity)
+                } else {
+                    // Экран онбординга
+                    OnboardingView {
+                        // Завершение онбординга
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            hasCompletedOnboarding = true
+                        }
+                    }
+                    .transition(.opacity)
+                }
+            }
+            .animation(.easeInOut(duration: 0.3), value: hasCompletedOnboarding)
         }
     }
 }
