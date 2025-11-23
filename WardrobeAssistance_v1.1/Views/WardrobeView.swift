@@ -10,9 +10,11 @@ import CoreData
 
 struct WardrobeView: View {
     @EnvironmentObject var viewModel: WardrobeViewModel
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showingFilters = false
     @State private var showingAddItem = false
+    @State private var showPaywall = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemEntity.dateAdded, ascending: false)],
@@ -69,6 +71,32 @@ struct WardrobeView: View {
                             .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if !storeKitManager.isPremium && allItems.count >= storeKitManager.getFreeTierLimit(.unlimitedItems) {
+                    // Premium limit reached
+                    VStack(spacing: 20) {
+                        Image(systemName: "crown.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(.yellow)
+                        Text("Premium Limit Reached")
+                            .font(.headline)
+                        Text("You've added \(allItems.count) items. Upgrade to Premium for unlimited items.")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                        
+                        Button(action: {
+                            showPaywall = true
+                        }) {
+                            Text("Upgrade to Premium")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(12)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     ScrollView {
                         LazyVGrid(columns: [
@@ -109,6 +137,10 @@ struct WardrobeView: View {
             .sheet(isPresented: $showingFilters) {
                 FilterView()
                     .environmentObject(viewModel)
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+                    .environmentObject(storeKitManager)
             }
         }
     }

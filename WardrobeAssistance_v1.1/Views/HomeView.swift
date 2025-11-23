@@ -14,6 +14,9 @@ struct HomeView: View {
     @EnvironmentObject var recommendationViewModel: RecommendationViewModel
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var showingAddItem = false
+    @State private var refreshID = UUID()
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemEntity.dateAdded, ascending: false)],
         animation: .default
@@ -48,13 +51,47 @@ struct HomeView: View {
                 }
                 .padding()
             }
+            .scrollContentBackground(.hidden)
+            .id(refreshID)
             .navigationTitle("My Wardrobe")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    // Пустой элемент для симметричного выравнивания
+                    Color.clear
+                        .frame(width: 32, height: 32)
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddItemView().environmentObject(wardrobeViewModel)) {
+                    Button(action: { 
+                        print("HomeView - Add button tapped")
+                        showingAddItem = true 
+                    }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.title2)
                     }
+                }
+            }
+            .sheet(isPresented: $showingAddItem) {
+                AddItemView()
+                    .environmentObject(wardrobeViewModel)
+            }
+            .onAppear {
+                print("HomeView appeared - refreshID: \(refreshID)")
+                print("HomeView - wardrobeViewModel exists: \(wardrobeViewModel != nil)")
+                print("HomeView - items count: \(allItems.count)")
+                
+                // Принудительное обновление через небольшой delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    refreshID = UUID()
+                    print("HomeView - refreshID updated: \(refreshID)")
+                }
+            }
+            .task {
+                // Дополнительное принудительное обновление через task
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 секунды
+                await MainActor.run {
+                    refreshID = UUID()
+                    print("HomeView - task refreshID updated: \(refreshID)")
                 }
             }
         }

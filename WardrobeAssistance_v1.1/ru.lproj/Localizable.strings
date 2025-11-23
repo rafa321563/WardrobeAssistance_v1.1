@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  WardrobeAssistance_v1.1
+  
+  Russian Localization
+*/
+
+// MARK: - Paywall
+"paywall_title" = "Wardrobe Premium";
+"paywall_subtitle" = "Откройте премиум функции для вашего гардероба";
+"paywall_start_trial" = "Начать 7-дневный БЕСПЛАТНЫЙ пробный период";
+"paywall_then_price" = "Затем %@ в месяц";
+"paywall_cancel_anytime" = "Отмена в любое время — без оплаты до окончания пробного периода";
+"paywall_subscribe" = "Подписаться на Premium";
+"paywall_restore" = "Восстановить покупки";
+"paywall_privacy" = "Политика конфиденциальности";
+"paywall_terms" = "Условия использования";
+
+// MARK: - Premium Features
+"premium_feature_unlimited" = "Неограниченное количество вещей";
+"premium_feature_ai" = "AI-стилист (полный доступ)";
+"premium_feature_matching" = "Умный подбор образов";
+"premium_feature_analytics" = "Расширенная аналитика";
+"premium_feature_icloud" = "Синхронизация iCloud (Premium)";
+"premium_feature_updates" = "Приоритетные обновления и новые функции";
+
+// MARK: - Onboarding
+"onboarding_organize_title" = "Организуйте свой гардероб";
+"onboarding_organize_text" = "Оцифруйте свою одежду и создайте умный гардероб.";
+"onboarding_suggestions_title" = "Умные рекомендации образов";
+"onboarding_suggestions_text" = "Получайте рекомендации на основе AI для любого случая.";
+"onboarding_assistant_title" = "Ваш персональный стилист";
+"onboarding_assistant_text" = "Обновитесь до Premium для расширенной аналитики и синхронизации iCloud.";
+
+// MARK: - Subscription
+"subscription_loading" = "Загрузка...";
+"subscription_error" = "Произошла ошибка";
+"subscription_restore_success" = "Покупки успешно восстановлены";
+"subscription_restore_failed" = "Не удалось восстановить покупки";
+"subscription_purchase_cancelled" = "Покупка была отменена";
+"subscription_purchase_pending" = "Покупка ожидает одобрения";
+
+// MARK: - Settings
+"settings_manage_subscription" = "Управление подпиской";
+"settings_premium_status" = "Статус Premium";
+"settings_premium_active" = "Активна";
+"settings_premium_inactive" = "Неактивна";
+
+// MARK: - Premium Gating
+"premium_required" = "Требуется Premium";
+"premium_required_message" = "Эта функция требует подписки Premium.";
+"premium_upgrade" = "Обновить до Premium";
+"premium_limit_reached" = "Достигнут лимит бесплатного уровня";
+"premium_limit_message" = "Обновитесь до Premium для неограниченного количества вещей.";
+

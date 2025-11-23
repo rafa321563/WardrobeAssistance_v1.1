@@ -23,8 +23,14 @@ struct OnboardingView: View {
     /// Параллакс offset для фона
     @State private var parallaxOffset: CGFloat = 0
     
+    /// Показать Paywall
+    @State private var showPaywall: Bool = false
+    
     /// Замыкание для завершения онбординга
     let onComplete: () -> Void
+    
+    /// Environment object для Paywall
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     
     // MARK: - Body
     
@@ -66,6 +72,10 @@ struct OnboardingView: View {
                         .padding(.horizontal, 24)
                         .padding(.bottom, 40)
                 }
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+                    .environmentObject(storeKitManager)
             }
         }
     }
@@ -172,8 +182,8 @@ struct OnboardingView: View {
                     
                     // Кнопка "Получить Премиум"
                     Button(action: {
-                        // TODO: Реализовать переход на Premium
-                        completeOnboarding()
+                        // Show paywall before completing onboarding
+                        showPaywall = true
                     }) {
                         HStack(spacing: 12) {
                             Image(systemName: "crown.fill")
