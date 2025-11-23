@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WardrobeAssistance_v1_1App: App {
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
+                .environment(\.managedObjectContext, persistenceController.viewContext)
         }
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24411" systemVersion="24G325" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ItemEntity" representedClassName="ItemEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="brand" optional="YES" attributeType="String"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageFileName" optional="YES" attributeType="String"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastWorn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="material" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="season" optional="YES" attributeType="String"/>
+        <attribute name="style" optional="YES" attributeType="String"/>
+        <attribute name="tags" optional="YES" attributeType="String"/>
+        <attribute name="wearCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="OutfitEntity" representedClassName="OutfitEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES" defaultValueString="NO"/>
+        <attribute name="items" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[UUID]"/>
+        <attribute name="lastWorn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="occasion" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="season" attributeType="String"/>
+        <attribute name="wearCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+</model>
