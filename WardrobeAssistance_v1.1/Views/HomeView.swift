@@ -53,7 +53,8 @@ struct HomeView: View {
             }
             .scrollContentBackground(.hidden)
             .id(refreshID)
-            .navigationTitle("My Wardrobe")
+            .navigationTitle(Text("nav_my_wardrobe"))
+                .minimumScaleFactor(0.8)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     // Пустой элемент для симметричного выравнивания
@@ -109,8 +110,10 @@ struct DailyRecommendationCard: View {
             HStack {
                 Image(systemName: "sparkles")
                     .foregroundColor(.yellow)
-                Text("Today's Outfit")
+                Text("home_todays_outfit")
                     .font(.headline)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
                 Spacer()
                 if let weather = recommendationViewModel.weatherData {
                     HStack(spacing: 4) {
@@ -143,11 +146,12 @@ struct DailyRecommendationCard: View {
                         outfitViewModel.currentOutfitItems = recommendation
                     }
                 }) {
-                    Text("Use This Outfit")
+                    Text("action_use_outfit")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
+<<<<<<< Updated upstream
                         .padding()
                         .background(
                             ZStack {
@@ -155,17 +159,25 @@ struct DailyRecommendationCard: View {
                                 Color.black.opacity(0.1)
                             }
                         )
+=======
+                        .padding(.horizontal)
+                        .padding(.vertical, 12)
+                        .background(Color.blue)
+>>>>>>> Stashed changes
                         .cornerRadius(12)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
                 }
             } else {
                 Button(action: {
                     recommendationViewModel.generateDailyRecommendation()
                 }) {
-                    Text("Generate Outfit")
+                    Text("action_generate_outfit")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
+<<<<<<< Updated upstream
                         .padding()
                         .background(
                             ZStack {
@@ -173,7 +185,14 @@ struct DailyRecommendationCard: View {
                                 Color.black.opacity(0.1)
                             }
                         )
+=======
+                        .padding(.horizontal)
+                        .padding(.vertical, 12)
+                        .background(Color.blue)
+>>>>>>> Stashed changes
                         .cornerRadius(12)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
                 }
             }
         }
@@ -198,21 +217,21 @@ struct QuickStatsView: View {
     var body: some View {
         HStack(spacing: 16) {
             StatCard(
-                title: "Items",
+                title: String(localized: "home_stat_items"),
                 value: "\(itemCount)",
                 icon: "tshirt.fill",
                 color: .blue
             )
             
             StatCard(
-                title: "Outfits",
+                title: String(localized: "home_stat_outfits"),
                 value: "\(outfitCount)",
                 icon: "square.grid.2x2.fill",
                 color: .purple
             )
             
             StatCard(
-                title: "Favorites",
+                title: String(localized: "home_stat_favorites"),
                 value: "\(favoriteItems.count)",
                 icon: "heart.fill",
                 color: .red
@@ -235,9 +254,13 @@ struct StatCard: View {
             Text(value)
                 .font(.title2)
                 .fontWeight(.bold)
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
+                .minimumScaleFactor(0.8)
+                .lineLimit(2)
         }
         .frame(maxWidth: .infinity)
         .padding()
@@ -252,9 +275,11 @@ struct RecentItemsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Recent Items")
+            Text("home_recent_items")
                 .font(.headline)
                 .padding(.horizontal)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -276,9 +301,11 @@ struct FavoriteOutfitsView: View {
     var body: some View {
         if !outfits.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Favorite Outfits")
+                Text("home_favorite_outfits")
                     .font(.headline)
                     .padding(.horizontal)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {

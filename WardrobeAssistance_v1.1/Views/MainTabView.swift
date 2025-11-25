@@ -43,21 +43,21 @@ struct MainTabView: View {
                 .environmentObject(recommendationViewModel)
                 .environmentObject(styleAssistant)
                 .tabItem {
-                    Label("Home", systemImage: "house.fill")
+                    Label(Text("tab_home"), systemImage: "house.fill")
                 }
             
             WardrobeView()
                 .environmentObject(wardrobeViewModel)
                 .environmentObject(storeKitManager)
                 .tabItem {
-                    Label("Wardrobe", systemImage: "tshirt.fill")
+                    Label(Text("tab_wardrobe"), systemImage: "tshirt.fill")
                 }
             
             OutfitBuilderView()
                 .environmentObject(wardrobeViewModel)
                 .environmentObject(outfitViewModel)
                 .tabItem {
-                    Label("Outfits", systemImage: "square.grid.2x2.fill")
+                    Label(Text("tab_outfits"), systemImage: "square.grid.2x2.fill")
                 }
             
             RecommendationsView()
@@ -66,7 +66,7 @@ struct MainTabView: View {
                 .environmentObject(recommendationViewModel)
                 .environmentObject(styleAssistant)
                 .tabItem {
-                    Label("AI Style", systemImage: "sparkles")
+                    Label(Text("tab_ai_style"), systemImage: "sparkles")
                 }
             
             MoreView()
@@ -74,7 +74,7 @@ struct MainTabView: View {
                 .environmentObject(wardrobeViewModel)
                 .environmentObject(outfitViewModel)
                 .tabItem {
-                    Label("More", systemImage: "ellipsis.circle")
+                    Label(Text("tab_more"), systemImage: "ellipsis.circle")
                 }
         }
         .accentColor(.blue)

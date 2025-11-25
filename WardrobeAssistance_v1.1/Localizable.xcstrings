@@ -1,0 +1,1265 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "·" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld items" : {
+
+    },
+    "%lld°C" : {
+
+    },
+    "%lld°C • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld°C • %2$@"
+          }
+        }
+      }
+    },
+    "1.1.0" : {
+
+    },
+    "About" : {
+
+    },
+    "Account" : {
+
+    },
+    "Active" : {
+
+    },
+    "Add Item" : {
+
+    },
+    "Add items from your wardrobe to create an outfit" : {
+
+    },
+    "Add Photo" : {
+
+    },
+    "Add your first clothing item to get started" : {
+
+    },
+    "Additional Information" : {
+
+    },
+    "AI Analysis Status" : {
+
+    },
+    "AI Insight: %@" : {
+
+    },
+    "AI Style" : {
+
+    },
+    "AI Style Assistant" : {
+
+    },
+    "AI Stylist" : {
+
+    },
+    "AI Stylist Chat" : {
+
+    },
+    "AI готов помочь. Сгенерируй образ, чтобы увидеть предложения." : {
+
+    },
+    "AI подобрал лук с учётом погоды и стиля." : {
+
+    },
+    "All" : {
+
+    },
+    "All items have been worn." : {
+
+    },
+    "Analytics" : {
+
+    },
+    "Are you sure you want to delete this item? This action cannot be undone." : {
+
+    },
+    "Basic Information" : {
+
+    },
+    "Brand" : {
+
+    },
+    "Brand (optional)" : {
+
+    },
+    "Calendar" : {
+
+    },
+    "Camera" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Cancel anytime — no charges until the trial ends" : {
+
+    },
+    "Category" : {
+
+    },
+    "Category Distribution" : {
+
+    },
+    "Clear All" : {
+
+    },
+    "Color" : {
+
+    },
+    "Current Weather" : {
+
+    },
+    "Daily Outfit Recommendation" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Item" : {
+
+    },
+    "Done" : {
+
+    },
+    "Edit" : {
+
+    },
+    "Edit Item" : {
+
+    },
+    "Favorite Outfits" : {
+
+    },
+    "Favorites Only" : {
+
+    },
+    "Filters" : {
+
+    },
+    "Generate Outfit" : {
+
+    },
+    "Generate Recommendation" : {
+
+    },
+    "Home" : {
+
+    },
+    "Image" : {
+
+    },
+    "Inactive" : {
+
+    },
+    "Item Name" : {
+
+    },
+    "Items" : {
+
+    },
+    "Least Worn Items" : {
+
+    },
+    "Manage Subscription" : {
+
+    },
+    "Mark as Worn" : {
+
+    },
+    "Material" : {
+
+    },
+    "Material (optional)" : {
+
+    },
+    "More" : {
+
+    },
+    "Most Worn Items" : {
+
+    },
+    "My Wardrobe" : {
+
+    },
+    "No items found" : {
+
+    },
+    "No items have been worn yet." : {
+
+    },
+    "No items in outfit" : {
+
+    },
+    "No matches found. Try adding more items to your wardrobe." : {
+
+    },
+    "No outfit planned for this date" : {
+
+    },
+    "Notes" : {
+
+    },
+    "Occasion" : {
+
+    },
+    "Occasion-Based Outfits" : {
+
+    },
+    "onboarding_assistant_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade to Premium for deeper insights and iCloud sync."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновитесь до Premium для расширенной аналитики и синхронизации iCloud."
+          }
+        }
+      }
+    },
+    "onboarding_assistant_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Personal Style Assistant"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш персональный стилист"
+          }
+        }
+      }
+    },
+    "onboarding_organize_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Digitize your clothing and build a smarter closet."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оцифруйте свою одежду и создайте умный гардероб."
+          }
+        }
+      }
+    },
+    "onboarding_organize_title" : {
+      "comment" : "MARK: - Onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organize Your Wardrobe"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Организуйте свой гардероб"
+          }
+        }
+      }
+    },
+    "onboarding_suggestions_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get AI-powered recommendations for any occasion."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Получайте рекомендации на основе AI для любого случая."
+          }
+        }
+      }
+    },
+    "onboarding_suggestions_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smart Outfit Suggestions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Умные рекомендации образов"
+          }
+        }
+      }
+    },
+    "Options" : {
+
+    },
+    "Outfit Builder" : {
+
+    },
+    "Outfit Calendar" : {
+
+    },
+    "Outfit Details" : {
+
+    },
+    "Outfit Library" : {
+
+    },
+    "Outfit Name" : {
+
+    },
+    "Outfits" : {
+
+    },
+    "Overview" : {
+
+    },
+    "paywall_cancel_anytime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jederzeit kündbar — keine Gebühren bis zum Ende der Testversion"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel anytime — no charges until the trial ends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancela en cualquier momento — sin cargos hasta que termine la prueba"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulez à tout moment — aucun frais jusqu'à la fin de l'essai"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена в любое время — без оплаты до окончания пробного периода"
+          }
+        }
+      }
+    },
+    "paywall_privacy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutzrichtlinie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика конфиденциальности"
+          }
+        }
+      }
+    },
+    "paywall_restore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käufe wiederherstellen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar compras"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurer les achats"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
+          }
+        }
+      }
+    },
+    "paywall_start_trial" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Tage KOSTENLOSE Testversion starten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start 7-Day FREE Trial"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar prueba GRATIS de 7 días"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer l'essai GRATUIT de 7 jours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать 7-дневный БЕСПЛАТНЫЙ пробный период"
+          }
+        }
+      }
+    },
+    "paywall_subscribe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf Premium upgraden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscribe to Premium"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suscribirse a Premium"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'abonner à Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подписаться на Premium"
+          }
+        }
+      }
+    },
+    "paywall_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schalten Sie Premium-Funktionen für Ihren Kleiderschrank frei"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock premium features for your wardrobe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloquea funciones premium para tu guardarropa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Débloquez les fonctionnalités premium pour votre garde-robe"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откройте премиум функции для вашего гардероба"
+          }
+        }
+      }
+    },
+    "paywall_terms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzungsbedingungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos de uso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conditions d'utilisation"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условия использования"
+          }
+        }
+      }
+    },
+    "paywall_then_price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dann %@ pro Monat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Then %@ per month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luego %@ por mes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puis %@ par mois"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Затем %@ в месяц"
+          }
+        }
+      }
+    },
+    "paywall_title" : {
+      "comment" : "MARK: - Paywall",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wardrobe Premium"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wardrobe Premium"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wardrobe Premium"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wardrobe Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wardrobe Premium"
+          }
+        }
+      }
+    },
+    "Photo Library" : {
+
+    },
+    "Plan Outfit" : {
+
+    },
+    "Planned Outfit" : {
+
+    },
+    "Planning" : {
+
+    },
+    "Premium Limit Reached" : {
+
+    },
+    "Premium Status" : {
+
+    },
+    "premium_feature_ai" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KI-Stylist (voller Zugang)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI stylist (full access)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estilista IA (acceso completo)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Styliste IA (accès complet)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI-стилист (полный доступ)"
+          }
+        }
+      }
+    },
+    "premium_feature_analytics" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweiterte Analysen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advanced analytics"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Análisis avanzados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analyses avancées"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расширенная аналитика"
+          }
+        }
+      }
+    },
+    "premium_feature_icloud" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud-Synchronisierung (Premium)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud sync (Premium)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronización iCloud (Premium)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisation iCloud (Premium)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронизация iCloud (Premium)"
+          }
+        }
+      }
+    },
+    "premium_feature_matching" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intelligente Outfit-Zusammenstellung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smart outfit matching"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combinación inteligente de outfits"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assortiment intelligent d'ensembles"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Умный подбор образов"
+          }
+        }
+      }
+    },
+    "premium_feature_unlimited" : {
+      "comment" : "MARK: - Premium Features",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbegrenzte Kleidungsstücke"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited wardrobe items"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artículos ilimitados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Articles illimités"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неограниченное количество вещей"
+          }
+        }
+      }
+    },
+    "premium_feature_updates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prioritäts-Updates & neue Funktionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priority updates & new features"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizaciones prioritarias y nuevas funciones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mises à jour prioritaires et nouvelles fonctionnalités"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приоритетные обновления и новые функции"
+          }
+        }
+      }
+    },
+    "premium_limit_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade to Premium for unlimited items."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновитесь до Premium для неограниченного количества вещей."
+          }
+        }
+      }
+    },
+    "premium_limit_reached" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've reached the free tier limit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достигнут лимит бесплатного уровня"
+          }
+        }
+      }
+    },
+    "premium_required" : {
+      "comment" : "MARK: - Premium Gating",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Required"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Требуется Premium"
+          }
+        }
+      }
+    },
+    "premium_required_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This feature requires a Premium subscription."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эта функция требует подписки Premium."
+          }
+        }
+      }
+    },
+    "premium_upgrade" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade to Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить до Premium"
+          }
+        }
+      }
+    },
+    "Privacy Policy" : {
+
+    },
+    "Recent Items" : {
+
+    },
+    "Restore Purchases" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save Outfit" : {
+
+    },
+    "Search items..." : {
+
+    },
+    "Season" : {
+
+    },
+    "Select an item to see smart matches" : {
+
+    },
+    "Select Outfit" : {
+
+    },
+    "Select Photo" : {
+
+    },
+    "Settings" : {
+
+    },
+    "settings_manage_subscription" : {
+      "comment" : "MARK: - Settings",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage Subscription"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Управление подпиской"
+          }
+        }
+      }
+    },
+    "settings_premium_active" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Активна"
+          }
+        }
+      }
+    },
+    "settings_premium_inactive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inactive"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неактивна"
+          }
+        }
+      }
+    },
+    "settings_premium_status" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Status"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статус Premium"
+          }
+        }
+      }
+    },
+    "Smart Matches for %@" : {
+
+    },
+    "Start 7-Day FREE Trial" : {
+
+    },
+    "Statistics" : {
+
+    },
+    "Style" : {
+
+    },
+    "Style & Season" : {
+
+    },
+    "Style Distribution" : {
+
+    },
+    "Subscription" : {
+
+    },
+    "subscription_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Произошла ошибка"
+          }
+        }
+      }
+    },
+    "subscription_loading" : {
+      "comment" : "MARK: - Subscription",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка..."
+          }
+        }
+      }
+    },
+    "subscription_purchase_cancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase was cancelled"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покупка была отменена"
+          }
+        }
+      }
+    },
+    "subscription_purchase_pending" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase is pending approval"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покупка ожидает одобрения"
+          }
+        }
+      }
+    },
+    "subscription_restore_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to restore purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось восстановить покупки"
+          }
+        }
+      }
+    },
+    "subscription_restore_success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchases restored successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покупки успешно восстановлены"
+          }
+        }
+      }
+    },
+    "Tags" : {
+
+    },
+    "Tags (comma-separated)" : {
+
+    },
+    "Terms of Use" : {
+
+    },
+    "Then %@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Then %1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "Then %@ per month · Cancel anytime" : {
+
+    },
+    "Today's Outfit" : {
+
+    },
+    "Upgrade to Premium" : {
+
+    },
+    "Use This Outfit" : {
+
+    },
+    "Version" : {
+
+    },
+    "Wardrobe" : {
+
+    },
+    "Wardrobe Premium" : {
+
+    },
+    "Worn %lld times" : {
+
+    },
+    "You've added %lld items. Upgrade to Premium for unlimited items." : {
+
+    },
+    "Запрашиваем свежие рекомендации у AI..." : {
+
+    },
+    "Получай советы и задавай вопросы персональному стилисту." : {
+
+    },
+    "Сеть или ключ API недоступны. Используем локальные рекомендации." : {
+
+    },
+    "Спроси про стиль, тренды или уход..." : {
+
+    }
+  },
+  "version" : "1.1"
+}
