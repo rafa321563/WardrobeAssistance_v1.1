@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Wardrobe Assistant needs camera access so you can photograph clothing items and add them to your wardrobe.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Wardrobe Assistant needs access to your photo library so you can select photos of your clothing.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Wardrobe Assistant needs permission to save clothing photos to your library.</string>
+</dict>
+</plist>
+
