@@ -10,9 +10,11 @@ import CoreData
 
 struct WardrobeView: View {
     @EnvironmentObject var viewModel: WardrobeViewModel
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showingFilters = false
     @State private var showingAddItem = false
+    @State private var showPaywall = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemEntity.dateAdded, ascending: false)],
@@ -56,17 +58,45 @@ struct WardrobeView: View {
                 
                 // Items Grid
                 if filteredItems.isEmpty {
-                    VStack(spacing: 16) {
-                        Image(systemName: "tshirt")
+                    ModernEmptyStateView(
+                        icon: "tshirt",
+                        title: allItems.isEmpty ? "Your Wardrobe is Empty" : "No items found",
+                        message: allItems.isEmpty 
+                            ? "Add your first clothing item to get started"
+                            : "Try adjusting your filters",
+                        action: allItems.isEmpty ? {
+                            let generator = UIImpactFeedbackGenerator(style: .medium)
+                            generator.impactOccurred()
+                            showingAddItem = true
+                        } : nil,
+                        actionLabel: allItems.isEmpty ? "Add Item" : nil
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
+                } else if !storeKitManager.isPremium && allItems.count >= storeKitManager.getFreeTierLimit(.unlimitedItems) {
+                    // Premium limit reached
+                    VStack(spacing: 20) {
+                        Image(systemName: "crown.fill")
                             .font(.system(size: 60))
-                            .foregroundColor(.gray)
-                        Text("No items found")
+                            .foregroundColor(.yellow)
+                        Text("Premium Limit Reached")
                             .font(.headline)
-                            .foregroundColor(.secondary)
-                        Text("Add your first clothing item to get started")
+                        Text("You've added \(allItems.count) items. Upgrade to Premium for unlimited items.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                        
+                        Button(action: {
+                            showPaywall = true
+                        }) {
+                            Text("Upgrade to Premium")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(12)
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
@@ -90,15 +120,27 @@ struct WardrobeView: View {
             .navigationTitle("My Wardrobe")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { showingFilters = true }) {
+                    Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .light)
+                        generator.impactOccurred()
+                        showingFilters = true
+                    }) {
                         Image(systemName: "line.3.horizontal.decrease.circle")
+                            .accessibilityLabel("Filter items")
+                            .accessibilityHint("Double tap to filter your wardrobe items")
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddItem = true }) {
+                    Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                        showingAddItem = true
+                    }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.title2)
+                            .accessibilityLabel("Add new item")
+                            .accessibilityHint("Double tap to add a new clothing item")
                     }
                 }
             }
@@ -110,6 +152,11 @@ struct WardrobeView: View {
                 FilterView()
                     .environmentObject(viewModel)
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+                    .environmentObject(storeKitManager)
+            }
+            .errorAlert(error: $viewModel.error)
         }
     }
 }

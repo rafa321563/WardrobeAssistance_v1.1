@@ -32,6 +32,8 @@ struct AddItemView: View {
             Form {
                 Section(header: Text("Image")) {
                     Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
                         showingImagePicker = true
                     }) {
                         HStack {
@@ -129,6 +131,8 @@ struct AddItemView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
                         saveItem()
                     }
                     .disabled(name.isEmpty || isSaving)

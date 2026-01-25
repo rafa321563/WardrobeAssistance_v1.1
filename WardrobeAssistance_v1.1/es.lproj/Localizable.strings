@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  WardrobeAssistance_v1.1
+  
+  Spanish Localization
+*/
+
+// MARK: - Paywall
+"paywall_title" = "Wardrobe Premium";
+"paywall_subtitle" = "Desbloquea funciones premium para tu guardarropa";
+"paywall_start_trial" = "Iniciar prueba GRATIS de 7 días";
+"paywall_then_price" = "Luego %@ por mes";
+"paywall_cancel_anytime" = "Cancela en cualquier momento — sin cargos hasta que termine la prueba";
+"paywall_subscribe" = "Suscribirse a Premium";
+"paywall_restore" = "Restaurar compras";
+"paywall_privacy" = "Política de privacidad";
+"paywall_terms" = "Términos de uso";
+
+// MARK: - Premium Features
+"premium_feature_unlimited" = "Artículos ilimitados";
+"premium_feature_ai" = "Estilista IA (acceso completo)";
+"premium_feature_matching" = "Combinación inteligente de outfits";
+"premium_feature_analytics" = "Análisis avanzados";
+"premium_feature_icloud" = "Sincronización iCloud (Premium)";
+"premium_feature_updates" = "Actualizaciones prioritarias y nuevas funciones";
+

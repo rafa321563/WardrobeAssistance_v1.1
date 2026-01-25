@@ -72,6 +72,8 @@ struct OutfitBuilderView: View {
                     .background(Color(.systemGray6))
                     
                     Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
                         showingSaveOutfit = true
                     }) {
                         Text("Save Outfit")
@@ -84,19 +86,15 @@ struct OutfitBuilderView: View {
                     }
                     .padding()
                 } else {
-                    VStack(spacing: 16) {
-                        Image(systemName: "square.grid.2x2")
-                            .font(.system(size: 60))
-                            .foregroundColor(.gray)
-                        Text("No items in outfit")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                        Text("Add items from your wardrobe to create an outfit")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
+                    ModernEmptyStateView(
+                        icon: "square.grid.2x2",
+                        title: "No items in outfit",
+                        message: "Add items from your wardrobe to create an outfit",
+                        action: nil,
+                        actionLabel: nil
+                    )
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
                 }
                 
                 Divider()
@@ -125,9 +123,13 @@ struct OutfitBuilderView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .light)
+                        generator.impactOccurred()
                         showingOutfitLibrary = true
                     }) {
                         Image(systemName: "square.grid.2x2.fill")
+                            .accessibilityLabel("Outfit library")
+                            .accessibilityHint("Double tap to view your saved outfits")
                     }
                 }
             }
@@ -140,6 +142,7 @@ struct OutfitBuilderView: View {
                     .environmentObject(outfitViewModel)
                     .environmentObject(wardrobeViewModel)
             }
+            .errorAlert(error: $outfitViewModel.error)
         }
     }
 }
@@ -162,6 +165,8 @@ struct CategorySection: View {
                 HStack(spacing: 12) {
                     ForEach(items) { item in
                         Button(action: {
+                            let generator = UISelectionFeedbackGenerator()
+                            generator.selectionChanged()
                             onItemTap(item)
                         }) {
                             ItemThumbnailView(item: item)
@@ -226,6 +231,8 @@ struct SaveOutfitView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
                         saveOutfit()
                     }
                     .disabled(outfitViewModel.currentOutfitItems.isEmpty || isSaving)

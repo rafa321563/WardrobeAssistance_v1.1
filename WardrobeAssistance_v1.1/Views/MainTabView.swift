@@ -17,6 +17,9 @@ struct MainTabView: View {
     @StateObject private var recommendationViewModel: RecommendationViewModel
     @StateObject private var styleAssistant: AIStyleAssistant
     
+    // StoreKit manager from app entry point
+    @EnvironmentObject var storeKitManager: SubscriptionManager
+    
     init() {
         // Create ViewModels with proper dependency injection
         // All ViewModels are owned by MainTabView, so strong references between them are safe
@@ -45,6 +48,7 @@ struct MainTabView: View {
             
             WardrobeView()
                 .environmentObject(wardrobeViewModel)
+                .environmentObject(storeKitManager)
                 .tabItem {
                     Label("Wardrobe", systemImage: "tshirt.fill")
                 }
@@ -65,26 +69,25 @@ struct MainTabView: View {
                     Label("AI Style", systemImage: "sparkles")
                 }
             
-            AnalyticsView()
+            MoreView()
+                .environmentObject(storeKitManager)
                 .environmentObject(wardrobeViewModel)
                 .environmentObject(outfitViewModel)
                 .tabItem {
-                    Label("Analytics", systemImage: "chart.bar.fill")
-                }
-            
-            CalendarView()
-                .environmentObject(wardrobeViewModel)
-                .environmentObject(outfitViewModel)
-                .tabItem {
-                    Label("Calendar", systemImage: "calendar")
+                    Label("More", systemImage: "ellipsis.circle")
                 }
         }
         .accentColor(.blue)
+        .onAppear {
+            print("MainTabView appeared - creating new ViewModels")
+            print("MainTabView - wardrobeViewModel exists: \(wardrobeViewModel != nil)")
+        }
     }
 }
 
 #Preview {
     MainTabView()
+        .environmentObject(SubscriptionManager())
         .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
 }
 
