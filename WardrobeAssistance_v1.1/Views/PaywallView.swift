@@ -17,6 +17,8 @@ struct PaywallView: View {
     
     @State private var selectedDesign: PaywallDesign = .premiumLuxury
     @State private var isPurchasing: Bool = false
+    @State private var showPrivacyPolicy = false
+    @State private var showTerms = false
     
     /// Current product (premium subscription)
     private var premiumProduct: Product? {
@@ -228,6 +230,8 @@ struct PaywallView: View {
     
     private var ctaButton: some View {
         Button(action: {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
             Task {
                 await purchasePremium()
             }
@@ -284,12 +288,26 @@ struct PaywallView: View {
     
     private var footerLinks: some View {
         HStack(spacing: 20) {
-            Link("Privacy Policy", destination: URL(string: "https://yourwebsite.com/privacy")!)
+            Button("Privacy Policy") {
+                showPrivacyPolicy = true
+            }
             Text("·")
-            Link("Terms of Use", destination: URL(string: "https://yourwebsite.com/terms")!)
+            Button("Terms of Use") {
+                showTerms = true
+            }
         }
         .font(.system(size: 12))
         .foregroundColor(.secondary)
+        .sheet(isPresented: $showPrivacyPolicy) {
+            NavigationView {
+                PrivacyPolicyView()
+            }
+        }
+        .sheet(isPresented: $showTerms) {
+            NavigationView {
+                TermsOfUseView()
+            }
+        }
     }
     
     // MARK: - Premium Features
@@ -405,9 +423,17 @@ struct PaywallView: View {
             _ = try await storeKitManager.purchase(product)
             // If purchase successful, dismiss
             if storeKitManager.isPremium {
-                dismiss()
+                await MainActor.run {
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                    dismiss()
+                }
             }
         } catch {
+            await MainActor.run {
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+            }
             print("❌ PaywallView: Purchase failed - \(error)")
         }
         

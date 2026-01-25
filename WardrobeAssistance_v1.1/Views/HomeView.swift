@@ -62,12 +62,15 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { 
-                        print("HomeView - Add button tapped")
-                        showingAddItem = true 
+                    Button(action: {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                        showingAddItem = true
                     }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.title2)
+                            .accessibilityLabel("Add new item")
+                            .accessibilityHint("Double tap to add a new clothing item")
                     }
                 }
             }
@@ -75,6 +78,7 @@ struct HomeView: View {
                 AddItemView()
                     .environmentObject(wardrobeViewModel)
             }
+            .errorAlert(error: $wardrobeViewModel.error)
             .onAppear {
                 print("HomeView appeared - refreshID: \(refreshID)")
                 print("HomeView - wardrobeViewModel exists: \(wardrobeViewModel != nil)")
@@ -139,6 +143,8 @@ struct DailyRecommendationCard: View {
                 }
                 
                 Button(action: {
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
                     if let recommendation = recommendationViewModel.dailyRecommendation {
                         outfitViewModel.currentOutfitItems = recommendation
                     }
@@ -154,6 +160,8 @@ struct DailyRecommendationCard: View {
                 }
             } else {
                 Button(action: {
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
                     recommendationViewModel.generateDailyRecommendation()
                 }) {
                     Text("Generate Outfit")

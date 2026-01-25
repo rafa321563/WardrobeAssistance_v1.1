@@ -122,8 +122,16 @@ struct CalendarGrid: View {
     
     var daysInMonth: [Date] {
         let calendar = Calendar.current
-        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedDate))!
-        let range = calendar.range(of: .day, in: .month, for: startOfMonth)!
+        guard let startOfMonth = calendar.date(
+            from: calendar.dateComponents([.year, .month], from: selectedDate)
+        ) else {
+            return []
+        }
+        
+        guard let range = calendar.range(of: .day, in: .month, for: startOfMonth) else {
+            return []
+        }
+        
         let numDays = range.count
         let firstDayOfWeek = calendar.component(.weekday, from: startOfMonth)
         

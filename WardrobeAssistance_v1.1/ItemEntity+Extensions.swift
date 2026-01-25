@@ -17,8 +17,8 @@ extension ItemEntity {
     /// Returns the category as a ClothingCategory enum, or nil if invalid
     var categoryEnum: ClothingCategory? {
         get {
-            guard let categoryString = category else { return nil }
-            return ClothingCategory(rawValue: categoryString)
+            guard let category = category else { return nil }
+                return ClothingCategory(rawValue: category)
         }
         set {
             category = newValue?.rawValue

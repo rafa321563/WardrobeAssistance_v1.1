@@ -29,13 +29,12 @@ struct WardrobeAssistance_v1_1App: App {
                         .transition(.opacity)
                 } else {
                     // Экран онбординга
-                    OnboardingView {
+                    SimplifiedOnboardingView {
                         // Завершение онбординга
                         withAnimation(.easeInOut(duration: 0.3)) {
                             hasCompletedOnboarding = true
                         }
                     }
-                    .environmentObject(storeKitManager)
                     .transition(.opacity)
                 }
             }

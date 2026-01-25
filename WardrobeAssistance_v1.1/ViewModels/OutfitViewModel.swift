@@ -21,6 +21,9 @@ class OutfitViewModel: ObservableObject {
     // Current outfit builder state
     @Published var currentOutfitItems: [UUID] = []
     
+    // Error state
+    @Published var error: Error?
+    
     init(wardrobeViewModel: WardrobeViewModel) {
         self.wardrobeViewModel = wardrobeViewModel
     }
@@ -48,6 +51,7 @@ class OutfitViewModel: ObservableObject {
                 rating: rating
             )
         } catch {
+            self.error = error
             print("Failed to create outfit: \(error.localizedDescription)")
         }
     }
@@ -75,6 +79,7 @@ class OutfitViewModel: ObservableObject {
                 rating: rating
             )
         } catch {
+            self.error = error
             print("Failed to update outfit: \(error.localizedDescription)")
         }
     }
@@ -84,6 +89,7 @@ class OutfitViewModel: ObservableObject {
         do {
             try await dataService.deleteOutfit(id: id)
         } catch {
+            self.error = error
             print("Failed to delete outfit: \(error.localizedDescription)")
         }
     }
@@ -93,6 +99,7 @@ class OutfitViewModel: ObservableObject {
         do {
             try await dataService.toggleFavorite(id: id)
         } catch {
+            self.error = error
             print("Failed to toggle favorite: \(error.localizedDescription)")
         }
     }
@@ -110,6 +117,7 @@ class OutfitViewModel: ObservableObject {
                 }
             }
         } catch {
+            self.error = error
             print("Failed to mark outfit as worn: \(error.localizedDescription)")
         }
     }

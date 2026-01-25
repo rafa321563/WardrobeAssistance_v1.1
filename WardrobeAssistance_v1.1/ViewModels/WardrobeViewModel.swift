@@ -31,6 +31,9 @@ class WardrobeViewModel: ObservableObject {
     @Published var selectedStyle: Style?
     @Published var showFavoritesOnly: Bool = false
     
+    // Error state
+    @Published var error: Error?
+    
     // MARK: - Write Operations
     
     /// Adds a new item to the wardrobe
@@ -58,6 +61,7 @@ class WardrobeViewModel: ObservableObject {
                 tags: tags
             )
         } catch {
+            self.error = error
             print("Failed to add item: \(error.localizedDescription)")
         }
     }
@@ -89,6 +93,7 @@ class WardrobeViewModel: ObservableObject {
                 tags: tags
             )
         } catch {
+            self.error = error
             print("Failed to update item: \(error.localizedDescription)")
         }
     }
@@ -98,6 +103,7 @@ class WardrobeViewModel: ObservableObject {
         do {
             try await dataService.deleteItem(id: id)
         } catch {
+            self.error = error
             print("Failed to delete item: \(error.localizedDescription)")
         }
     }
@@ -107,6 +113,7 @@ class WardrobeViewModel: ObservableObject {
         do {
             try await dataService.toggleFavorite(id: id)
         } catch {
+            self.error = error
             print("Failed to toggle favorite: \(error.localizedDescription)")
         }
     }
@@ -116,6 +123,7 @@ class WardrobeViewModel: ObservableObject {
         do {
             try await dataService.markAsWorn(id: id)
         } catch {
+            self.error = error
             print("Failed to mark as worn: \(error.localizedDescription)")
         }
     }
