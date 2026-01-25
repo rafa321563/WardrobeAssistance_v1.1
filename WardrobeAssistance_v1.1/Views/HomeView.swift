@@ -55,11 +55,11 @@ struct HomeView: View {
             .id(refreshID)
             .navigationTitle("My Wardrobe")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+            //    ToolbarItem(placement: .navigationBarLeading) {
                     // Пустой элемент для симметричного выравнивания
-                    Color.clear
-                        .frame(width: 32, height: 32)
-                }
+              //      Color.clear
+               //         .frame(width: 32, height: 32)
+                //}
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
