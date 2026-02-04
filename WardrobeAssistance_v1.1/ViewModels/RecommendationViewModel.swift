@@ -18,27 +18,52 @@ class RecommendationViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var aiReasoning: String?
     @Published var aiErrorMessage: String?
-    
+    @Published var stylePreference: StylePreference = .mixed
+
     private let wardrobeViewModel: WardrobeViewModel
     private let outfitViewModel: OutfitViewModel
-    
+    private let weatherService = WeatherService.shared
+    private let engine = OutfitRecommendationEngine.shared
+    private let aiService = AIStyleService.shared
+    private let persistenceController = PersistenceController.shared
+
     init(wardrobeViewModel: WardrobeViewModel, outfitViewModel: OutfitViewModel) {
         self.wardrobeViewModel = wardrobeViewModel
         self.outfitViewModel = outfitViewModel
-        loadMockWeatherData()
+
+        Task {
+            await loadWeather()
+        }
     }
-    
+
     // MARK: - Weather Integration
-    
-    func loadMockWeatherData() {
-        // In a real app, this would fetch from a weather API
-        // For now, we'll use mock data based on current season
+
+    func loadWeather() async {
+        do {
+            let weather = try await weatherService.fetchWeather()
+            self.weatherData = weather
+        } catch {
+            print("Failed to load weather: \(error)")
+            self.weatherData = createFallbackWeather()
+        }
+    }
+
+    func refreshWeather() async {
+        isLoading = true
+        await loadWeather()
+        isLoading = false
+
+        // Regenerate recommendation with new weather
+        generateDailyRecommendation()
+    }
+
+    private func createFallbackWeather() -> WeatherData {
         let calendar = Calendar.current
         let month = calendar.component(.month, from: Date())
-        
+
         var temperature: Double = 20.0
         var condition: WeatherCondition = .sunny
-        
+
         switch month {
         case 12, 1, 2: // Winter
             temperature = Double.random(in: -5...10)
@@ -55,152 +80,105 @@ class RecommendationViewModel: ObservableObject {
         default:
             break
         }
-        
-        weatherData = WeatherData(
+
+        return WeatherData(
             temperature: temperature,
             condition: condition,
             humidity: Double.random(in: 30...80),
             windSpeed: Double.random(in: 0...20)
         )
     }
-    
-    // MARK: - Daily Recommendation
-    
+
+    // MARK: - Recommendation Generation
+
     func generateDailyRecommendation() {
-        isLoading = true
-        aiReasoning = nil
-        aiErrorMessage = nil
-        
         Task {
-            let context = PersistenceController.shared.viewContext
-            let occasion = getRecommendedOccasion()
-            let fallbackSeason = weatherData?.recommendedSeason ?? .allSeason
-            
-            // Try to generate recommendation using outfit view model
-            if let recommendation = outfitViewModel.generateOutfitRecommendation(
-                occasion: occasion,
-                season: fallbackSeason,
-                weather: weatherData,
-                context: context
-            ) {
+            isLoading = true
+            aiErrorMessage = nil
+
+            do {
+                // Fetch all items
+                let items = try await fetchAllItems()
+
+                guard !items.isEmpty else {
+                    aiErrorMessage = "Добавьте вещи в гардероб, чтобы получить рекомендации"
+                    isLoading = false
+                    return
+                }
+
+                // Ensure weather is loaded
+                if weatherData == nil {
+                    await loadWeather()
+                }
+
+                guard let weather = weatherData else {
+                    aiErrorMessage = "Не удалось загрузить данные о погоде"
+                    isLoading = false
+                    return
+                }
+
+                // Generate outfit
+                let response = try await aiService.generateOutfitRecommendation(
+                    occasion: .casual,
+                    weather: weather,
+                    stylePreference: stylePreference,
+                    items: items
+                )
+
                 await MainActor.run {
-                    self.dailyRecommendation = recommendation
-                    self.aiReasoning = "Подобран образ для \(occasion.rawValue) с учётом погоды"
+                    self.dailyRecommendation = response.suggestedOutfit
+                    self.aiReasoning = response.reasoning
                     self.isLoading = false
                 }
-            } else {
+
+            } catch {
                 await MainActor.run {
-                    self.aiErrorMessage = "Не удалось подобрать образ. Добавьте больше вещей в гардероб."
+                    self.aiErrorMessage = error.localizedDescription
                     self.isLoading = false
                 }
             }
         }
     }
-    
-    private func getRecommendedOccasion() -> Occasion {
-        let hour = Calendar.current.component(.hour, from: Date())
-        
-        // Simple logic: work hours = work, evening = casual/date, etc.
-        switch hour {
-        case 8...17:
-            return .work
-        case 18...20:
-            return [.date, .casual].randomElement() ?? .casual
-        default:
-            return .casual
+
+    func generateOutfitForOccasion(_ occasion: Occasion) {
+        Task {
+            isLoading = true
+
+            do {
+                let items = try await fetchAllItems()
+
+                guard let weather = weatherData else {
+                    await loadWeather()
+                    return
+                }
+
+                let response = try await aiService.generateOutfitRecommendation(
+                    occasion: occasion,
+                    weather: weather,
+                    stylePreference: stylePreference,
+                    items: items
+                )
+
+                await MainActor.run {
+                    self.dailyRecommendation = response.suggestedOutfit
+                    self.aiReasoning = response.reasoning
+                    self.isLoading = false
+                }
+
+            } catch {
+                await MainActor.run {
+                    self.aiErrorMessage = error.localizedDescription
+                    self.isLoading = false
+                }
+            }
         }
     }
-    
-    // MARK: - Smart Matching
-    
-    func getSmartMatchingItems(for item: ItemEntity, context: NSManagedObjectContext) -> [ItemEntity] {
-        // Fetch all items except the current one
-        guard let itemId = item.id else {
-            return []
-        }
+
+    private func fetchAllItems() async throws -> [ItemEntity] {
+        let context = persistenceController.viewContext
         let request: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id != %@", itemId as CVarArg)
-        let availableItems = (try? context.fetch(request)) ?? []
-        
-        var matches: [ItemEntity] = []
-        
-        // Find items that match in style and season
-        for otherItem in availableItems {
-            var score = 0
-            
-            // Style match
-            if otherItem.styleEnum == item.styleEnum {
-                score += 2
-            }
-            
-            // Season match
-            if otherItem.seasonEnum == item.seasonEnum || 
-               otherItem.seasonEnum == .allSeason || 
-               item.seasonEnum == .allSeason {
-                score += 1
-            }
-            
-            // Color compatibility (basic rules)
-            if let itemColor = item.colorEnum, let otherColor = otherItem.colorEnum,
-               areColorsCompatible(itemColor, otherColor) {
-                score += 1
-            }
-            
-            // Category compatibility
-            if let itemCategory = item.categoryEnum, let otherCategory = otherItem.categoryEnum,
-               areCategoriesCompatible(itemCategory, otherCategory) {
-                score += 2
-            }
-            
-            if score >= 3 {
-                matches.append(otherItem)
-            }
-        }
-        
-        // Sort by wear count (prefer less worn items)
-        return matches.sorted { ($0.wearCount) < ($1.wearCount) }
-    }
-    
-    private func areColorsCompatible(_ color1: ClothingColor, _ color2: ClothingColor) -> Bool {
-        // Basic color compatibility rules
-        let neutralColors: Set<ClothingColor> = [.black, .white, .gray, .navy, .beige, .brown]
-        
-        if neutralColors.contains(color1) || neutralColors.contains(color2) {
-            return true
-        }
-        
-        // Complementary colors
-        let complementaryPairs: [(ClothingColor, ClothingColor)] = [
-            (.red, .green),
-            (.blue, .orange),
-            (.yellow, .purple)
-        ]
-        
-        for (c1, c2) in complementaryPairs {
-            if (color1 == c1 && color2 == c2) || (color1 == c2 && color2 == c1) {
-                return true
-            }
-        }
-        
-        return color1 == color2
-    }
-    
-    private func areCategoriesCompatible(_ cat1: ClothingCategory, _ cat2: ClothingCategory) -> Bool {
-        // Tops go with bottoms, dresses are standalone, etc.
-        switch (cat1, cat2) {
-        case (.tops, .bottoms), (.bottoms, .tops):
-            return true
-        case (.dresses, _), (_, .dresses):
-            return false // Dresses are standalone
-        case (.shoes, _), (_, .shoes):
-            return true // Shoes go with anything
-        case (.accessories, _), (_, .accessories):
-            return true // Accessories go with anything
-        case (.outerwear, _), (_, .outerwear):
-            return true // Outerwear goes with anything
-        default:
-            return false
-        }
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ItemEntity.dateAdded, ascending: false)]
+
+        return try context.fetch(request)
     }
 }
-
