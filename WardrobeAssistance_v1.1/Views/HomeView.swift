@@ -113,17 +113,35 @@ struct DailyRecommendationCard: View {
             HStack {
                 Image(systemName: "sparkles")
                     .foregroundColor(.yellow)
-                Text("Today's Outfit")
+                Text("Образ на сегодня")
                     .font(.headline)
                 Spacer()
                 if let weather = recommendationViewModel.weatherData {
                     HStack(spacing: 4) {
-                        Image(systemName: weather.condition == .sunny ? "sun.max.fill" : "cloud.fill")
+                        Image(systemName: weatherIcon(for: weather.condition))
+                            .foregroundColor(weatherColor(for: weather.condition))
                         Text("\(Int(weather.temperature))°C")
                             .font(.caption)
+                            .fontWeight(.medium)
                     }
-                    .foregroundColor(.secondary)
+                    .padding(6)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
                 }
+            }
+
+            // AI Reasoning
+            if let reasoning = recommendationViewModel.aiReasoning {
+                HStack {
+                    Image(systemName: "brain.head.profile")
+                        .foregroundColor(.purple)
+                    Text(reasoning)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding(8)
+                .background(Color.purple.opacity(0.1))
+                .cornerRadius(8)
             }
             
             if recommendationViewModel.isLoading {
@@ -149,13 +167,19 @@ struct DailyRecommendationCard: View {
                         outfitViewModel.currentOutfitItems = recommendation
                     }
                 }) {
-                    Text("Use This Outfit")
+                    Text("Использовать этот образ")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(
+                            LinearGradient(
+                                colors: [Color.blue, Color.purple],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
                         .cornerRadius(12)
                 }
             } else {
@@ -164,21 +188,66 @@ struct DailyRecommendationCard: View {
                     generator.impactOccurred()
                     recommendationViewModel.generateDailyRecommendation()
                 }) {
-                    Text("Generate Outfit")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(12)
+                    HStack {
+                        Image(systemName: "sparkles")
+                        Text("Подобрать образ")
+                            .fontWeight(.semibold)
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        LinearGradient(
+                            colors: [Color.blue, Color.purple],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .cornerRadius(12)
                 }
+            }
+
+            // Error message
+            if let errorMessage = recommendationViewModel.aiErrorMessage {
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.orange)
+                    Text(errorMessage)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding(8)
+                .background(Color.orange.opacity(0.1))
+                .cornerRadius(8)
             }
         }
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+    }
+
+    private func weatherIcon(for condition: WeatherCondition) -> String {
+        switch condition {
+        case .sunny: return "sun.max.fill"
+        case .cloudy: return "cloud.fill"
+        case .rainy: return "cloud.rain.fill"
+        case .snowy: return "snow"
+        case .windy: return "wind"
+        case .foggy: return "cloud.fog.fill"
+        }
+    }
+
+    private func weatherColor(for condition: WeatherCondition) -> Color {
+        switch condition {
+        case .sunny: return .orange
+        case .cloudy: return .gray
+        case .rainy: return .blue
+        case .snowy: return .cyan
+        case .windy: return .teal
+        case .foggy: return .gray
+        }
     }
 }
 

@@ -8,75 +8,124 @@
 import Foundation
 import SwiftUI
 import Combine
-
-struct AIStyleMessage: Identifiable, Equatable {
-    enum Role {
-        case user
-        case assistant
-    }
-    
-    let id = UUID()
-    let role: Role
-    let text: String
-    let timestamp: Date
-}
+import CoreData
 
 @MainActor
 final class AIStyleAssistant: ObservableObject {
-    @Published private(set) var messages: [AIStyleMessage] = []
+    @Published private(set) var messages: [ChatMessage] = []
     @Published private(set) var isProcessing: Bool = false
     @Published private(set) var errorMessage: String?
-    
-    // Use weak reference to avoid retain cycles
-    // MainTabView owns both AIStyleAssistant and WardrobeViewModel,
-    // so this is safe and prevents memory leaks
+
     private weak var wardrobeViewModel: WardrobeViewModel?
-    
+    private let aiService = AIStyleService.shared
+    private let persistenceController = PersistenceController.shared
+
     init(wardrobeViewModel: WardrobeViewModel) {
         self.wardrobeViewModel = wardrobeViewModel
-        
+
         messages.append(
-            AIStyleMessage(
+            ChatMessage(
                 role: .assistant,
-                text: "Привет! Я твой персональный AI-стилист. Спроси меня о подборе образа, уходе за вещами или как обновить гардероб.",
-                timestamp: Date()
+                content: "Привет! Я твой персональный AI-стилист. 👗\n\nСпроси меня:\n• Что надеть на сегодня\n• Как подобрать образ\n• Что сочетается с моими вещами\n\nИли выбери быстрое действие ниже ⬇️",
+                timestamp: Date(),
+                suggestedOutfit: nil
             )
         )
     }
-    
+
+    // MARK: - Public Methods
+
     func send(message: String) {
+        guard !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
         errorMessage = nil
-        let userMessage = AIStyleMessage(role: .user, text: message, timestamp: Date())
+        let userMessage = ChatMessage(role: .user, content: message, timestamp: Date())
         messages.append(userMessage)
-        
+
         Task {
             await process(message: message)
         }
     }
-    
+
+    func requestDailyOutfit() {
+        send(message: "Подбери мне образ на сегодня")
+    }
+
+    func requestWorkOutfit() {
+        send(message: "Что надеть на работу?")
+    }
+
+    func requestDateOutfit() {
+        send(message: "Подбери образ на свидание")
+    }
+
+    func requestTrends() {
+        send(message: "Какие сейчас актуальные тренды?")
+    }
+
+    // MARK: - Private Methods
+
     private func process(message: String) async {
         guard !isProcessing else { return }
         isProcessing = true
-        
-        // Example of safe weak reference usage:
-        // If wardrobeViewModel is needed, use guard let to safely unwrap
-        // guard let vm = wardrobeViewModel else {
-        //     await MainActor.run {
-        //         self.errorMessage = "Wardrobe data unavailable"
-        //         self.isProcessing = false
-        //     }
-        //     return
-        // }
-        // Use vm here...
-        
-        // Simplified response - in a real app, this would call an AI service
-        let response = "Спасибо за вопрос! В будущих версиях здесь будет интеграция с AI для персональных советов по стилю."
-        
-        let assistantMessage = AIStyleMessage(role: .assistant, text: response, timestamp: Date())
-        
+
+        guard let wardrobeViewModel = wardrobeViewModel else {
+            await showError("Гардероб недоступен")
+            return
+        }
+
+        do {
+            // Fetch all items from wardrobe
+            let items = try await fetchAllItems()
+
+            // Get AI response
+            let response = try await aiService.getResponse(
+                message: message,
+                history: Array(messages.suffix(10)),
+                items: items
+            )
+
+            // Create assistant message
+            let assistantMessage = ChatMessage(
+                role: .assistant,
+                content: response.text,
+                timestamp: Date(),
+                suggestedOutfit: response.suggestedOutfit
+            )
+
+            await MainActor.run {
+                self.messages.append(assistantMessage)
+                self.isProcessing = false
+                self.errorMessage = nil
+            }
+
+        } catch let error as AIError {
+            await showError(error.errorDescription ?? "Произошла ошибка")
+        } catch {
+            await showError("Не удалось получить ответ. Попробуйте позже.")
+        }
+    }
+
+    private func fetchAllItems() async throws -> [ItemEntity] {
+        let context = persistenceController.viewContext
+        let request: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ItemEntity.dateAdded, ascending: false)]
+
+        return try context.fetch(request)
+    }
+
+    private func showError(_ message: String) async {
         await MainActor.run {
-            self.messages.append(assistantMessage)
+            self.errorMessage = message
             self.isProcessing = false
+
+            let errorMsg = ChatMessage(
+                role: .assistant,
+                content: "⚠️ \(message)",
+                timestamp: Date(),
+                suggestedOutfit: nil
+            )
+            self.messages.append(errorMsg)
         }
     }
 }
