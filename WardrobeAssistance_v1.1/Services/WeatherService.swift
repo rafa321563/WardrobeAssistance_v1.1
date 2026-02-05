@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
 /// Weather service using Open-Meteo free API
 final class WeatherService: NSObject, ObservableObject {
