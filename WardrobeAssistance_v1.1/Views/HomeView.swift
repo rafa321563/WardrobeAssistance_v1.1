@@ -12,9 +12,12 @@ struct HomeView: View {
     @EnvironmentObject var wardrobeViewModel: WardrobeViewModel
     @EnvironmentObject var outfitViewModel: OutfitViewModel
     @EnvironmentObject var recommendationViewModel: RecommendationViewModel
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @State private var showingAddItem = false
+    @State private var showPaywall = false
+    @State private var showingMenu = false
     @State private var refreshID = UUID()
     
     @FetchRequest(
@@ -31,46 +34,62 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Daily Recommendation Card
-                    DailyRecommendationCard()
-                        .environmentObject(recommendationViewModel)
-                        .environmentObject(wardrobeViewModel)
-                        .environmentObject(outfitViewModel)
-                    
-                    // Quick Stats
-                    QuickStatsView(itemCount: allItems.count, outfitCount: allOutfits.count)
-                    
-                    // Recent Items
-                    RecentItemsView(items: Array(allItems.prefix(5)))
-                    
-                    // Favorite Outfits
-                    FavoriteOutfitsView(outfits: Array(allOutfits.filter { $0.isFavorite }.prefix(3)))
-                        .environmentObject(wardrobeViewModel)
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // Daily Recommendation Card
+                        DailyRecommendationCard()
+                            .environmentObject(recommendationViewModel)
+                            .environmentObject(wardrobeViewModel)
+                            .environmentObject(outfitViewModel)
+
+                        // Quick Stats
+                        QuickStatsView(itemCount: allItems.count, outfitCount: allOutfits.count)
+
+                        // Recent Items
+                        RecentItemsView(items: Array(allItems.prefix(5)))
+
+                        // Favorite Outfits
+                        FavoriteOutfitsView(outfits: Array(allOutfits.filter { $0.isFavorite }.prefix(3)))
+                            .environmentObject(wardrobeViewModel)
+                    }
+                    .padding()
+                    .padding(.bottom, 80)
                 }
-                .padding()
+                .scrollContentBackground(.hidden)
+
+                // Floating Add Button
+                FloatingAddButton {
+                    showingAddItem = true
+                }
             }
-            .scrollContentBackground(.hidden)
             .id(refreshID)
             .navigationTitle("My Wardrobe")
             .toolbar {
-            //    ToolbarItem(placement: .navigationBarLeading) {
-                    // Пустой элемент для симметричного выравнивания
-              //      Color.clear
-               //         .frame(width: 32, height: 32)
-                //}
-                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showingMenu = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
+                    }
+                }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        let generator = UIImpactFeedbackGenerator(style: .medium)
-                        generator.impactOccurred()
-                        showingAddItem = true
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title2)
-                            .accessibilityLabel("Add new item")
-                            .accessibilityHint("Double tap to add a new clothing item")
+                    Button {
+                        showPaywall = true
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "crown.fill")
+                                .font(.caption)
+                            Text("PRO")
+                                .font(.caption.weight(.bold))
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(AppDesign.Colors.premiumGradient)
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
                     }
                 }
             }
@@ -78,24 +97,26 @@ struct HomeView: View {
                 AddItemView()
                     .environmentObject(wardrobeViewModel)
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+                    .environmentObject(storeKitManager)
+            }
+            .sheet(isPresented: $showingMenu) {
+                SideMenuView()
+                    .environmentObject(wardrobeViewModel)
+                    .environmentObject(outfitViewModel)
+                    .environmentObject(storeKitManager)
+            }
             .errorAlert(error: $wardrobeViewModel.error)
             .onAppear {
-                print("HomeView appeared - refreshID: \(refreshID)")
-                print("HomeView - wardrobeViewModel exists: \(wardrobeViewModel != nil)")
-                print("HomeView - items count: \(allItems.count)")
-                
-                // Принудительное обновление через небольшой delay
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     refreshID = UUID()
-                    print("HomeView - refreshID updated: \(refreshID)")
                 }
             }
             .task {
-                // Дополнительное принудительное обновление через task
-                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 секунды
+                try? await Task.sleep(nanoseconds: 100_000_000)
                 await MainActor.run {
                     refreshID = UUID()
-                    print("HomeView - task refreshID updated: \(refreshID)")
                 }
             }
         }

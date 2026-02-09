@@ -57,7 +57,34 @@
 "image.processing.remove_bg" = "Удалить фон";
 "image.processing.removing" = "Удаление фона...";
 "image.processing.premium_hint" = "Обновитесь до Premium для улучшенной обработки с 3D-тенями";
+"image.processing.enhancing" = "Улучшение изображения...";
+"image.processing.enhance" = "Магическое улучшение";
+"image.processing.compare_hint" = "Удерживайте для сравнения до и после";
+"image.processing.before" = "До";
+"image.processing.ai_processing" = "Обработка изображения с помощью ИИ...";
+"image.processing.taking_longer" = "Занимает чуть больше времени";
+"image.processing.taking_longer_hint" = "Зависит от скорости сети или нагрузки на сервер";
 "image.processing.error.invalid" = "Не удалось обработать изображение";
 "image.processing.error.response" = "Некорректный ответ сервера";
 "image.processing.error.server" = "Ошибка сервера. Попробуйте позже.";
+
+// MARK: - Add Item
+"add_item.title" = "Новая вещь";
+"add_item.select_photo" = "Выбрать фото";
+"add_item.camera" = "Камера";
+"add_item.photo_library" = "Фотоплёнка";
+"add_item.tap_to_add_photo" = "Нажмите, чтобы добавить фото";
+"add_item.category" = "Категория";
+"add_item.brand" = "Бренд";
+"add_item.name" = "Название";
+"add_item.color" = "Цвет";
+"add_item.season" = "Сезон";
+"add_item.style" = "Стиль";
+"add_item.material" = "Материал";
+"add_item.tags" = "Теги";
+"add_item.tags_placeholder" = "через запятую";
+"add_item.save" = "Сохранить";
+"add_item.custom_option" = "Свой вариант";
+"add_item.custom_placeholder" = "Введите свой";
+"cancel" = "Отмена";
 

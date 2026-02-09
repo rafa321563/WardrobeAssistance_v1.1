@@ -11,9 +11,11 @@ import CoreData
 struct CalendarView: View {
     @EnvironmentObject var outfitViewModel: OutfitViewModel
     @EnvironmentObject var wardrobeViewModel: WardrobeViewModel
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
     @State private var selectedDate = Date()
     @State private var showingOutfitPicker = false
+    @State private var showingMenu = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \OutfitEntity.lastWorn, ascending: false)],
@@ -67,10 +69,26 @@ struct CalendarView: View {
                 }
             }
             .navigationTitle("Outfit Calendar")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showingMenu = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
+                    }
+                }
+            }
             .sheet(isPresented: $showingOutfitPicker) {
                 OutfitPickerView(selectedDate: selectedDate)
                     .environmentObject(outfitViewModel)
                     .environmentObject(wardrobeViewModel)
+            }
+            .sheet(isPresented: $showingMenu) {
+                SideMenuView()
+                    .environmentObject(wardrobeViewModel)
+                    .environmentObject(outfitViewModel)
+                    .environmentObject(storeKitManager)
             }
         }
     }

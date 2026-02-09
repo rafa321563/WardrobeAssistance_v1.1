@@ -28,7 +28,34 @@
 "image.processing.remove_bg" = "Supprimer l'arrière-plan";
 "image.processing.removing" = "Suppression de l'arrière-plan...";
 "image.processing.premium_hint" = "Passez à Premium pour un traitement amélioré avec des ombres 3D";
+"image.processing.enhancing" = "Amélioration de l'image...";
+"image.processing.enhance" = "Amélioration magique";
+"image.processing.compare_hint" = "Maintenez pour comparer avant et après";
+"image.processing.before" = "Avant";
+"image.processing.ai_processing" = "Traitement de l'image par IA...";
+"image.processing.taking_longer" = "Prend un peu plus de temps que prévu";
+"image.processing.taking_longer_hint" = "Peut dépendre de la connexion ou de la charge du serveur";
 "image.processing.error.invalid" = "Impossible de traiter cette image";
 "image.processing.error.response" = "Réponse invalide du serveur";
 "image.processing.error.server" = "Erreur du serveur. Veuillez réessayer plus tard.";
+
+// MARK: - Add Item
+"add_item.title" = "Nouvel article";
+"add_item.select_photo" = "Choisir une photo";
+"add_item.camera" = "Appareil photo";
+"add_item.photo_library" = "Photothèque";
+"add_item.tap_to_add_photo" = "Appuyez pour ajouter une photo";
+"add_item.category" = "Catégorie";
+"add_item.brand" = "Marque";
+"add_item.name" = "Nom";
+"add_item.color" = "Couleur";
+"add_item.season" = "Saison";
+"add_item.style" = "Style";
+"add_item.material" = "Matière";
+"add_item.tags" = "Tags";
+"add_item.tags_placeholder" = "séparés par des virgules";
+"add_item.save" = "Enregistrer";
+"add_item.custom_option" = "Personnalisé";
+"add_item.custom_placeholder" = "Saisissez le vôtre";
+"cancel" = "Annuler";
 

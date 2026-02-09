@@ -28,7 +28,34 @@
 "image.processing.remove_bg" = "Eliminar fondo";
 "image.processing.removing" = "Eliminando fondo...";
 "image.processing.premium_hint" = "Actualiza a Premium para procesamiento mejorado con sombras 3D";
+"image.processing.enhancing" = "Mejorando imagen...";
+"image.processing.enhance" = "Mejora mágica";
+"image.processing.compare_hint" = "Mantén presionado para comparar antes y después";
+"image.processing.before" = "Antes";
+"image.processing.ai_processing" = "Procesamiento de imagen con IA...";
+"image.processing.taking_longer" = "Tardando un poco más de lo habitual";
+"image.processing.taking_longer_hint" = "Puede depender de la conexión o la carga del servidor";
 "image.processing.error.invalid" = "No se pudo procesar esta imagen";
 "image.processing.error.response" = "Respuesta inválida del servidor";
 "image.processing.error.server" = "Error del servidor. Inténtalo más tarde.";
+
+// MARK: - Add Item
+"add_item.title" = "Nueva prenda";
+"add_item.select_photo" = "Seleccionar foto";
+"add_item.camera" = "Cámara";
+"add_item.photo_library" = "Biblioteca de fotos";
+"add_item.tap_to_add_photo" = "Toca para añadir una foto";
+"add_item.category" = "Categoría";
+"add_item.brand" = "Marca";
+"add_item.name" = "Nombre";
+"add_item.color" = "Color";
+"add_item.season" = "Temporada";
+"add_item.style" = "Estilo";
+"add_item.material" = "Material";
+"add_item.tags" = "Etiquetas";
+"add_item.tags_placeholder" = "separadas por comas";
+"add_item.save" = "Guardar";
+"add_item.custom_option" = "Personalizado";
+"add_item.custom_placeholder" = "Introduce el tuyo";
+"cancel" = "Cancelar";
 

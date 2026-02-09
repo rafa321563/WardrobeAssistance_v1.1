@@ -156,6 +156,9 @@ extension ItemEntity {
     var displayStyle: Style {
         styleEnum ?? .casual
     }
+
+    /// Returns the size string if set
+    var displaySize: String? { size }
     
     // MARK: - Wear Count Management
     

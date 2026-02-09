@@ -38,9 +38,11 @@ final class WardrobeDataService {
         color: ClothingColor,
         season: Season,
         style: Style,
+        styleOverride: String? = nil,
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
+        size: String? = nil,
         tags: [String] = [],
         hasTransparency: Bool = false
     ) async throws -> UUID {
@@ -64,10 +66,11 @@ final class WardrobeDataService {
             item.category = category.rawValue
             item.color = color.rawValue
             item.season = season.rawValue
-            item.style = style.rawValue
+            item.style = styleOverride ?? style.rawValue
             item.imageFileName = imageFileName
             item.material = material
             item.brand = brand
+            item.size = size
             item.tags = tags.isEmpty ? nil : tags.joined(separator: ", ")
             item.dateAdded = Date()
             item.wearCount = 0
@@ -105,6 +108,7 @@ final class WardrobeDataService {
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
+        size: String? = nil,
         tags: [String]? = nil
     ) async throws {
         try await persistenceController.performBackgroundTask { context in
@@ -148,6 +152,9 @@ final class WardrobeDataService {
             }
             if let brand = brand {
                 item.brand = brand.isEmpty ? nil : brand
+            }
+            if let size = size {
+                item.size = size.isEmpty ? nil : size
             }
             if let tags = tags {
                 item.tags = tags.isEmpty ? nil : tags.joined(separator: ", ")

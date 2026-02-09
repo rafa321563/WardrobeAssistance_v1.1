@@ -11,9 +11,11 @@ import CoreData
 struct OutfitBuilderView: View {
     @EnvironmentObject var wardrobeViewModel: WardrobeViewModel
     @EnvironmentObject var outfitViewModel: OutfitViewModel
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showingSaveOutfit = false
     @State private var showingOutfitLibrary = false
+    @State private var showingMenu = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemEntity.name, ascending: true)],
@@ -121,6 +123,14 @@ struct OutfitBuilderView: View {
             }
             .navigationTitle("Outfit Builder")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showingMenu = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -141,6 +151,12 @@ struct OutfitBuilderView: View {
                 OutfitLibraryView()
                     .environmentObject(outfitViewModel)
                     .environmentObject(wardrobeViewModel)
+            }
+            .sheet(isPresented: $showingMenu) {
+                SideMenuView()
+                    .environmentObject(wardrobeViewModel)
+                    .environmentObject(outfitViewModel)
+                    .environmentObject(storeKitManager)
             }
             .errorAlert(error: $outfitViewModel.error)
         }

@@ -13,7 +13,9 @@ struct RecommendationsView: View {
     @EnvironmentObject var outfitViewModel: OutfitViewModel
     @EnvironmentObject var recommendationViewModel: RecommendationViewModel
     @EnvironmentObject var styleAssistant: AIStyleAssistant
+    @EnvironmentObject var storeKitManager: SubscriptionManager
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var showingMenu = false
 
     var body: some View {
         NavigationView {
@@ -64,6 +66,22 @@ struct RecommendationsView: View {
             }
             .navigationTitle("Рекомендации")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showingMenu = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
+                    }
+                }
+            }
+            .sheet(isPresented: $showingMenu) {
+                SideMenuView()
+                    .environmentObject(wardrobeViewModel)
+                    .environmentObject(outfitViewModel)
+                    .environmentObject(storeKitManager)
+            }
         }
     }
 }

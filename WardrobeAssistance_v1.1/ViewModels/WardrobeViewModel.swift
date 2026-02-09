@@ -43,9 +43,11 @@ class WardrobeViewModel: ObservableObject {
         color: ClothingColor,
         season: Season,
         style: Style,
+        styleOverride: String? = nil,
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
+        size: String? = nil,
         tags: [String] = [],
         hasTransparency: Bool = false
     ) async {
@@ -56,9 +58,11 @@ class WardrobeViewModel: ObservableObject {
                 color: color,
                 season: season,
                 style: style,
+                styleOverride: styleOverride,
                 image: image,
                 material: material,
                 brand: brand,
+                size: size,
                 tags: tags,
                 hasTransparency: hasTransparency
             )
@@ -79,6 +83,7 @@ class WardrobeViewModel: ObservableObject {
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
+        size: String? = nil,
         tags: [String]? = nil
     ) async {
         do {
@@ -92,6 +97,7 @@ class WardrobeViewModel: ObservableObject {
                 image: image,
                 material: material,
                 brand: brand,
+                size: size,
                 tags: tags
             )
         } catch {

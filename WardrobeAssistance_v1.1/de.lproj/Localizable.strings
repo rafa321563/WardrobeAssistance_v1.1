@@ -28,7 +28,34 @@
 "image.processing.remove_bg" = "Hintergrund entfernen";
 "image.processing.removing" = "Hintergrund wird entfernt...";
 "image.processing.premium_hint" = "Upgrade auf Premium für verbesserte Verarbeitung mit 3D-Schatten";
+"image.processing.enhancing" = "Bild wird verbessert...";
+"image.processing.enhance" = "Magische Verbesserung";
+"image.processing.compare_hint" = "Gedrückt halten, um vorher und nachher zu vergleichen";
+"image.processing.before" = "Vorher";
+"image.processing.ai_processing" = "KI-Bildverarbeitung...";
+"image.processing.taking_longer" = "Dauert etwas länger als üblich";
+"image.processing.taking_longer_hint" = "Kann von der Verbindung oder Serverauslastung abhängen";
 "image.processing.error.invalid" = "Dieses Bild konnte nicht verarbeitet werden";
 "image.processing.error.response" = "Ungültige Serverantwort";
 "image.processing.error.server" = "Serverfehler. Bitte versuchen Sie es später erneut.";
+
+// MARK: - Add Item
+"add_item.title" = "Neues Teil";
+"add_item.select_photo" = "Foto auswählen";
+"add_item.camera" = "Kamera";
+"add_item.photo_library" = "Fotobibliothek";
+"add_item.tap_to_add_photo" = "Tippen, um ein Foto hinzuzufügen";
+"add_item.category" = "Kategorie";
+"add_item.brand" = "Marke";
+"add_item.name" = "Name";
+"add_item.color" = "Farbe";
+"add_item.season" = "Saison";
+"add_item.style" = "Stil";
+"add_item.material" = "Material";
+"add_item.tags" = "Tags";
+"add_item.tags_placeholder" = "kommagetrennt";
+"add_item.save" = "Speichern";
+"add_item.custom_option" = "Eigene Eingabe";
+"add_item.custom_placeholder" = "Eigene eingeben";
+"cancel" = "Abbrechen";
 

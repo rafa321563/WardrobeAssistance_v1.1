@@ -57,7 +57,35 @@
 "image.processing.remove_bg" = "Remove Background";
 "image.processing.removing" = "Removing background...";
 "image.processing.premium_hint" = "Upgrade to Premium for enhanced processing with 3D shadows";
+"image.processing.enhancing" = "Enhancing image...";
+"image.processing.enhance" = "Magic Enhancement";
+"image.processing.compare_hint" = "Hold to compare before & after";
+"image.processing.before" = "Before";
+"image.processing.ai_processing" = "AI image processing...";
+"image.processing.taking_longer" = "Taking a bit longer than usual";
+"image.processing.taking_longer_hint" = "May depend on connection speed or server load";
 "image.processing.error.invalid" = "Could not process this image";
 "image.processing.error.response" = "Invalid response from server";
 "image.processing.error.server" = "Server error. Please try again later.";
+
+// MARK: - Add Item
+"add_item.title" = "New Item";
+"add_item.select_photo" = "Select Photo";
+"add_item.camera" = "Camera";
+"add_item.photo_library" = "Photo Library";
+"add_item.tap_to_add_photo" = "Tap to add a photo";
+"add_item.category" = "Category";
+"add_item.brand" = "Brand";
+"add_item.name" = "Name";
+"add_item.color" = "Color";
+"add_item.season" = "Season";
+"add_item.style" = "Style";
+"add_item.size" = "Size";
+"add_item.material" = "Material";
+"add_item.tags" = "Tags";
+"add_item.tags_placeholder" = "comma-separated";
+"add_item.save" = "Save";
+"add_item.custom_option" = "Custom";
+"add_item.custom_placeholder" = "Enter your own";
+"cancel" = "Cancel";
 

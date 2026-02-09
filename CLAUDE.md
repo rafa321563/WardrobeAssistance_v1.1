@@ -277,7 +277,7 @@ The app supports 5 languages:
 - Spanish (es)
 - French (fr)
 
-When adding new user-facing strings, update all `.lproj/Localizable.strings` files.
+When adding new user-facing strings, **only update `en.lproj/Localizable.strings`**. Do NOT touch other language files (ru, de, es, fr) unless the user explicitly asks. The user handles translations manually.
 
 ## Important Notes
 
