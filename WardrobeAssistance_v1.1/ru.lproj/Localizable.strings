@@ -53,3 +53,11 @@
 "premium_limit_reached" = "Достигнут лимит бесплатного уровня";
 "premium_limit_message" = "Обновитесь до Premium для неограниченного количества вещей.";
 
+// Image Processing
+"image.processing.remove_bg" = "Удалить фон";
+"image.processing.removing" = "Удаление фона...";
+"image.processing.premium_hint" = "Обновитесь до Premium для улучшенной обработки с 3D-тенями";
+"image.processing.error.invalid" = "Не удалось обработать изображение";
+"image.processing.error.response" = "Некорректный ответ сервера";
+"image.processing.error.server" = "Ошибка сервера. Попробуйте позже.";
+

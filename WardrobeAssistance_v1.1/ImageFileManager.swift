@@ -61,6 +61,30 @@ final class ImageFileManager {
         }
     }
     
+    // MARK: - Save Image as PNG
+
+    /// Saves an image as PNG (preserves transparency) and returns the filename
+    /// - Parameter image: The UIImage to save
+    /// - Returns: The filename (UUID.png) that can be stored in Core Data, or nil if save failed
+    @discardableResult
+    func saveImageAsPNG(_ image: UIImage) -> String? {
+        guard let imageData = image.pngData() else {
+            print("Failed to convert image to PNG data")
+            return nil
+        }
+
+        let filename = UUID().uuidString + ".png"
+        let fileURL = imagesDirectory.appendingPathComponent(filename)
+
+        do {
+            try imageData.write(to: fileURL)
+            return filename
+        } catch {
+            print("Failed to save PNG image to disk: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
     // MARK: - Load Image
     
     /// Loads an image from disk by filename

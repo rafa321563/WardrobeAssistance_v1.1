@@ -26,6 +26,10 @@ struct AddItemView: View {
     @State private var showingCamera = false
     @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var isSaving = false
+    @State private var isRemovingBackground = false
+    @State private var backgroundRemovalError: String?
+    @State private var isPremiumProcessing = false
+    @State private var hasTransparency = false
     
     var body: some View {
         NavigationView {
@@ -71,6 +75,40 @@ struct AddItemView: View {
                                 .cancel()
                             ]
                         )
+                    }
+
+                    if selectedImage != nil {
+                        if isRemovingBackground {
+                            HStack {
+                                ProgressView()
+                                    .padding(.trailing, AppDesign.Spacing.s)
+                                Text(NSLocalizedString("image.processing.removing", comment: "Removing background..."))
+                                    .foregroundColor(.secondary)
+                            }
+                        } else {
+                            Button(action: removeBackground) {
+                                HStack {
+                                    Image(systemName: "wand.and.stars")
+                                    Text(NSLocalizedString("image.processing.remove_bg", comment: "Remove Background"))
+                                }
+                            }
+                        }
+
+                        if let error = backgroundRemovalError {
+                            Text(error)
+                                .font(.caption)
+                                .foregroundColor(AppDesign.Colors.error)
+                        }
+
+                        if hasTransparency && !isPremiumProcessing {
+                            HStack(spacing: AppDesign.Spacing.xs) {
+                                Image(systemName: "sparkles")
+                                    .foregroundColor(AppDesign.Colors.accent)
+                                Text(NSLocalizedString("image.processing.premium_hint", comment: "Upgrade to Premium for enhanced processing with 3D shadows"))
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                 }
                 
@@ -146,9 +184,9 @@ struct AddItemView: View {
     
     private func saveItem() {
         isSaving = true
-        
+
         let tagArray = tags.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-        
+
         Task {
             await viewModel.addItem(
                 name: name,
@@ -159,12 +197,37 @@ struct AddItemView: View {
                 image: selectedImage,
                 material: material.isEmpty ? nil : material,
                 brand: brand.isEmpty ? nil : brand,
-                tags: Array(tagArray)
+                tags: Array(tagArray),
+                hasTransparency: hasTransparency
             )
-            
+
             await MainActor.run {
                 isSaving = false
                 dismiss()
+            }
+        }
+    }
+
+    private func removeBackground() {
+        guard let image = selectedImage else { return }
+
+        isRemovingBackground = true
+        backgroundRemovalError = nil
+
+        Task {
+            do {
+                let result = try await ImageProcessingService.shared.processImage(image)
+                await MainActor.run {
+                    selectedImage = result.image
+                    isPremiumProcessing = result.isPremium
+                    hasTransparency = true
+                    isRemovingBackground = false
+                }
+            } catch {
+                await MainActor.run {
+                    backgroundRemovalError = error.localizedDescription
+                    isRemovingBackground = false
+                }
             }
         }
     }

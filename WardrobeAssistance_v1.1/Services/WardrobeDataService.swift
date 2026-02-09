@@ -41,10 +41,20 @@ final class WardrobeDataService {
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
-        tags: [String] = []
+        tags: [String] = [],
+        hasTransparency: Bool = false
     ) async throws -> UUID {
         // Save image to disk first (on current thread - file I/O is fast)
-        let imageFileName = image.flatMap { ImageFileManager.shared.saveImage($0) }
+        let imageFileName: String?
+        if let image = image {
+            if hasTransparency {
+                imageFileName = ImageFileManager.shared.saveImageAsPNG(image)
+            } else {
+                imageFileName = ImageFileManager.shared.saveImage(image)
+            }
+        } else {
+            imageFileName = nil
+        }
         
         // Create entity on background context
         return try await persistenceController.performBackgroundTask { context in

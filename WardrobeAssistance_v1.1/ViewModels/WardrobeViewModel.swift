@@ -46,7 +46,8 @@ class WardrobeViewModel: ObservableObject {
         image: UIImage? = nil,
         material: String? = nil,
         brand: String? = nil,
-        tags: [String] = []
+        tags: [String] = [],
+        hasTransparency: Bool = false
     ) async {
         do {
             _ = try await dataService.createItem(
@@ -58,7 +59,8 @@ class WardrobeViewModel: ObservableObject {
                 image: image,
                 material: material,
                 brand: brand,
-                tags: tags
+                tags: tags,
+                hasTransparency: hasTransparency
             )
         } catch {
             self.error = error

@@ -53,3 +53,11 @@
 "premium_limit_reached" = "You've reached the free tier limit";
 "premium_limit_message" = "Upgrade to Premium for unlimited items.";
 
+// Image Processing
+"image.processing.remove_bg" = "Remove Background";
+"image.processing.removing" = "Removing background...";
+"image.processing.premium_hint" = "Upgrade to Premium for enhanced processing with 3D shadows";
+"image.processing.error.invalid" = "Could not process this image";
+"image.processing.error.response" = "Invalid response from server";
+"image.processing.error.server" = "Server error. Please try again later.";
+

@@ -24,3 +24,11 @@
 "premium_feature_icloud" = "iCloud-Synchronisierung (Premium)";
 "premium_feature_updates" = "Prioritäts-Updates & neue Funktionen";
 
+// Image Processing
+"image.processing.remove_bg" = "Hintergrund entfernen";
+"image.processing.removing" = "Hintergrund wird entfernt...";
+"image.processing.premium_hint" = "Upgrade auf Premium für verbesserte Verarbeitung mit 3D-Schatten";
+"image.processing.error.invalid" = "Dieses Bild konnte nicht verarbeitet werden";
+"image.processing.error.response" = "Ungültige Serverantwort";
+"image.processing.error.server" = "Serverfehler. Bitte versuchen Sie es später erneut.";
+

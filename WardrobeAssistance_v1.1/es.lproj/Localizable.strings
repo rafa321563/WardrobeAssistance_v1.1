@@ -24,3 +24,11 @@
 "premium_feature_icloud" = "Sincronización iCloud (Premium)";
 "premium_feature_updates" = "Actualizaciones prioritarias y nuevas funciones";
 
+// Image Processing
+"image.processing.remove_bg" = "Eliminar fondo";
+"image.processing.removing" = "Eliminando fondo...";
+"image.processing.premium_hint" = "Actualiza a Premium para procesamiento mejorado con sombras 3D";
+"image.processing.error.invalid" = "No se pudo procesar esta imagen";
+"image.processing.error.response" = "Respuesta inválida del servidor";
+"image.processing.error.server" = "Error del servidor. Inténtalo más tarde.";
+
