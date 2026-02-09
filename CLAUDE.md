@@ -289,3 +289,21 @@ When adding new user-facing strings, **only update `en.lproj/Localizable.strings
 - **Test subscriptions** in Sandbox environment before production
 - The app has onboarding flow controlled by `@AppStorage("hasCompletedOnboarding")`
 - Privacy usage descriptions are configured in project settings (Camera, Photo Library)
+
+## Recent UI/UX Overhaul (Feb 2026) — DONE
+
+All changes build successfully.
+
+### Completed
+- **SideMenuView** (new) — sheet menu with Analytics + Settings, accessible from all tabs via hamburger icon
+- **FloatingAddButton** (new) — reusable 56pt gradient FAB, used in HomeView + WardrobeView
+- **MainTabView** — replaced "More" tab with "Calendar"; pop-to-root on tab re-tap via custom `Binding` + `.id(UUID)` reset; all tabs now pass `storeKitManager` + `outfitViewModel` for SideMenuView
+- **ItemDetailView** — inline editing (Form-based), auto-save on `.onDisappear`, removed `EditItemView` struct, bottom bar: Worn + Delete only
+- **WardrobeView** — category filter tags (horizontal capsules), heart overlay on cards (outside NavigationLink via ZStack), FAB, PRO button, menu button, removed FilterView sheet
+- **HomeView** — FAB, PRO button, menu button
+- **OutfitBuilderView / RecommendationsView / CalendarView** — added menu button + storeKitManager env
+
+### Key patterns introduced
+- Heart buttons on cards sit in ZStack **outside** NavigationLink (otherwise tap is swallowed)
+- Pop-to-root: custom `Binding<Tab>` setter detects `newTab == selectedTab` → resets UUID → recreates NavigationView
+- `MoreView` no longer in tab bar (file still exists)
